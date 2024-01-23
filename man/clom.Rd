@@ -11,8 +11,8 @@ clom(X, y, k, lambdapath, nfolds = 0, nlambda = 100)
 
 \item{y}{response; n vector}
 
-\item{k}{index that splits the n observations into \link{1,k} and (k,n];
-{1, ..., n-1}}
+\item{k}{index that splits the n observations into {1, ..., k} and
+{k+1, ..., n}; k takes values in {1, ..., n-1}}
 
 \item{lambdapath}{values of lambda to be used when no cross validation is
 is done; vector on non-negative numerics}

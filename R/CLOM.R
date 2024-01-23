@@ -5,8 +5,8 @@
 #'
 #' @param X covariates; n x p matrix
 #' @param y response; n vector
-#' @param k index that splits the n observations into [1,k] and (k,n];
-#'    {1, ..., n-1}
+#' @param k index that splits the n observations into {1, ..., k} and
+#'    {k+1, ..., n}; k takes values in {1, ..., n-1}
 #' @param lambdapath values of lambda to be used when no cross validation is
 #'    is done; vector on non-negative numerics
 #' @param nfolds number of folds to use in cross validation;
