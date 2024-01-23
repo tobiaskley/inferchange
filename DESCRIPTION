@@ -1,0 +1,20 @@
+Package: inferchange
+Title: Multiscale Covariance Scanning and related Algorithms
+Version: 0.0.0.9000
+Authors@R: c(
+  person("Haeran", "Cho", email = "haeran.cho@bristol.ac.uk", role=c("aut"),
+          comment = c(ORCID = "YOUR-ORCID-ID")),
+  person("Tobias", "Kley", email = "tobias.kley@uni-goettingen.de", role=c("aut","cre"),
+          comment = c(ORCID = "YOUR-ORCID-ID")),
+  person("Housen", "Li",  email = "housen.li@mathematik.uni-goettingen.de", role=c("aut"),
+          comment = c(ORCID = "YOUR-ORCID-ID")))
+Description: Implements function for inference of changes in high-dimensional
+  linear regression; cf. TODO refer to arxiv preprint.
+Imports:
+  PRIMAL
+License: GPL (>= 2)
+URL: http://github.com/inferchange/quantspec
+BugReports: http://github.com/tobiaskley/inferchange/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
