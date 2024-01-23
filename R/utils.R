@@ -1,16 +1,21 @@
 
 #' Find suitable grid of lambda values
 #'
-#' @param lambda_max TODO Add Description
-#' @param n TODO Add Description
-#' @param p TODO Add Description
-#' @param K TODO Add Description
+#' Generates K lambda values from `lambda_max` to 0.01 (if `n < p`) or 0.0001
+#' (if `n >= p`) in decreasing order that are equaly spaced on the log scale.
+#' This is the grid of lambda values employed as in `glmnet`.
+#' In applications lambda_max is chosen as
 #'
-#' @return TODO Add Description
+#' @param lambda_max TODO Add Description
+#' @param n value `n`
+#' @param p value `p`
+#' @param K number of lambda values
+#'
+#' @return vector with lambda values
 #' @export
 #'
 #' @examples
-#' # TODO Add Example or remove this
+#' lambdapath(10, 100, 200, K = 5)
 lambdapath <- function(lambda_max, n, p, K = 100) {
 
   epsilon <- ifelse(n < p, 0.01, 1e-04)

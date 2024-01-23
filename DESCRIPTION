@@ -7,13 +7,15 @@ Authors@R: c(
   person("Tobias", "Kley", email = "tobias.kley@uni-goettingen.de", role=c("aut","cre"),
           comment = c(ORCID = "0000-0003-4790-9695")),
   person("Housen", "Li",  email = "housen.li@mathematik.uni-goettingen.de", role=c("aut"),
-          comment = c(ORCID = "0000-0002-2434-9878")))
+          comment = c(ORCID = "0000-0002-2434-9878")),
+  person("Solt", "Kovacs", email = "solt.kovacs@stat.math.ethz.ch", role=c("ctb"),
+          comment = "interval() taken from https://github.com/kovacssolt/ChangePoints"))
 Description: Implements function for inference of changes in high-dimensional
   linear regression; cf. TODO refer to arxiv preprint.
 Imports:
   glmnet,
   PRIMAL
-License: GPL (>= 2)
+License: GPL (>= 3)
 URL: http://github.com/inferchange/quantspec
 BugReports: http://github.com/tobiaskley/inferchange/issues
 Encoding: UTF-8
