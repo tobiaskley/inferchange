@@ -17,6 +17,8 @@
 #' @return TODO Add Description
 #' @export
 #'
+#' @importFrom glmnet glmnet cv.glmnet
+#'
 #' @examples
 #' # TODO Add Example or remove this
 lope <- function(X, y, k, lambdapath, nfolds = 0, nlambda = 100) {
@@ -32,13 +34,13 @@ lope <- function(X, y, k, lambdapath, nfolds = 0, nlambda = 100) {
 
   if (nfolds == 0) {
     # compute solutions from all of the data
-    lasso1.all = glmnet(X, y, alpha = 1, standardize = FALSE, intercept = FALSE,
+    lasso1.all = glmnet::glmnet(X, y, alpha = 1, standardize = FALSE, intercept = FALSE,
                         lambda = lambdapath)
     delta1.all <- as.matrix(lasso1.all$beta)
   } else {
-    cv.mod = cv.glmnet(X, y, alpha = 1, standardize = FALSE, intercept = FALSE,
+    cv.mod = glmnet::cv.glmnet(X, y, alpha = 1, standardize = FALSE, intercept = FALSE,
                        foldid = rep(1:nfolds, length.out = n))
-    lasso.mod = glmnet(X, y, alpha = 1, standardize = TRUE, intercept = FALSE,
+    lasso.mod = glmnet::glmnet(X, y, alpha = 1, standardize = TRUE, intercept = FALSE,
                        lambda = cv.mod$lambda.min)
     delta1.all <- as.numeric(lasso.mod$beta)
   }

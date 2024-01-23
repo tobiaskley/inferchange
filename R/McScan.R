@@ -129,6 +129,9 @@ post_process <- function(est, cid, CS, agg, alpha, stat.bts, post, visual) {
 #'
 #' @return TODO Add Description
 #'
+#' @importFrom graphics abline lines
+#' @importFrom stats quantile
+#'
 #' @examples
 #' # TODO Add Example or remove this
 find_single_cp <- function(CS, st, ed, bnd, agg, s, alpha, stat.bts,

@@ -11,6 +11,7 @@ Authors@R: c(
 Description: Implements function for inference of changes in high-dimensional
   linear regression; cf. TODO refer to arxiv preprint.
 Imports:
+  glmnet,
   PRIMAL
 License: GPL (>= 2)
 URL: http://github.com/inferchange/quantspec
