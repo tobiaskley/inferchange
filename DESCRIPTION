@@ -9,7 +9,7 @@ Authors@R: c(
   person("Housen", "Li",  email = "housen.li@mathematik.uni-goettingen.de", role=c("aut"),
           comment = c(ORCID = "0000-0002-2434-9878")),
   person("Solt", "Kovacs", email = "solt.kovacs@stat.math.ethz.ch", role=c("ctb"),
-          comment = "interval() taken from https://github.com/kovacssolt/ChangePoints"))
+          comment = "The function interval() is taken from https://github.com/kovacssolt/ChangePoints"))
 Description: Implements function for inference of changes in high-dimensional
   linear regression; cf. TODO refer to arxiv preprint.
 Imports:
