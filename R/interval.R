@@ -6,13 +6,12 @@
 #' @return A 2-column matrix with all the start- and endpoints of the generated intervals
 #' @examples
 #' \donttest{
-#' interval(10)
+#' seeded_interval(10)
 #' }
 #' @export
 #' @useDynLib inferchange
 
-
-interval <-function(n,dec=sqrt(2),minl=2){
+seeded_interval <-function(n, dec=sqrt(2), minl=2){
   if (!is.integer(n)) {storage.mode(n) <- 'integer'}
   if(n < 3){stop("n should be at least 3")}
   if (!is.double(dec)) {storage.mode(dec) <- 'double'}

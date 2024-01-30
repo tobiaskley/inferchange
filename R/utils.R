@@ -23,3 +23,10 @@ lambdapath <- function(lambda_max, n, p, K = 100) {
                               length.out = K)), digits = 10)
   return(lambdapath)
 }
+
+#' @export
+print.inferchange.cp <- function(x, ...) {
+  cat("Detected", length(x$cp), "change points at", x$cp, "\n")
+}
+
+
