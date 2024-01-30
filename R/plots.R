@@ -31,14 +31,16 @@ plot.inferchange.ci <- function(x, ...){
 plot.inferchange.cp <- function(x, ...) {
   Xy = attr(x,"X") * matrix(attr(x,"y"), nrow = nrow(attr(x,"X")),
                             ncol = ncol(attr(x,"X")))
-  matplot(Xy, type = "l", col = "gray",
-          ylab = "Covariance of X and y",
-          xlab = "Sample index", lty = 1,
-          main = "Estimated change points")
-  abline(v = x$cp, col = "blue", lty = "dotted")
+  df = expand.grid(sample_index=1:n, coordinate=1:p)
+  df$covariance = as.vector(Xy)
+  plt = ggplot(df, aes(sample_index, coordinate, fill = covariance)) +
+    geom_tile() + scale_fill_viridis() +
+    theme_minimal() + geom_vline(xintercept = x$cp)
+  print(plt)
   if (!is.null(attr(x, "solution_path"))) {
     sopa = attr(x, "solution_path")
-    plt <- ggplot(data.frame(value = unlist(sopa[,2]),
+    id   = attr(x, "selected_solution")
+    plt  = ggplot(data.frame(value = unlist(sopa[,2]),
                              ncp = sapply(sopa[,3], length)),
                   aes(x=ncp, y=value)) +
       geom_line() + geom_count(alpha = 0.5) +

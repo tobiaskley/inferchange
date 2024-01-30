@@ -251,6 +251,7 @@ McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
   ret = .post_process(ret, cid, CS, post)
   if (exists("sopa")) { # when solution path is available
     attr(ret, "solution_path") = sopa
+    attr(ret, "selected_solution") = id
   }
   attr(ret, "X") = X
   attr(ret, "y") = y
