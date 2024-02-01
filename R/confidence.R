@@ -4,9 +4,8 @@
 #' @details See Cho, Kley and Li (2024) for further details.
 #' @param X design matrix with the rows containing the observations
 #' @param y vector of the responses
-#' @param k location of a change point
+#' @param k index of a single change point; must be an integer between \code{1} and \code{nrow(X) - 1}
 #' @param standardize boolean; if \code{standardize = TRUE}, each column of \code{X} is divided by its L2-norm
-#' @param intercept boolean; whether to include the intercept
 #' @param delta.hat an estimator of the differential parameter; if \code{delta.hat = NULL}, it is generated via \link[inferchange]{lope} with a tuning parameter generated via cross validation
 #' @param nfolds number of folds for the cross validation when producing an estimator of the precision matrix of \code{X}
 #' @param nlambdas size of the grid of the tuning parameter for the cross validation when producing an estimator of the precision matrix of \code{X}
@@ -15,8 +14,10 @@
 #' @param do.split boolean; whether to split the sample in confidence interval generation or not. When the sample size is moderate, it is recommended not to split the sample.
 #' @return an S3 object of class \code{inferchange.ci}, which contains the following fields:
 #' \item{delta.check}{de-sparsified estimator of the differential parameter}
+#' \item{delta.hat}{original, biased estimator of the differential parameter}
 #' \item{ci}{matrix containing the lower and the upper bound of the simultaneous confidence intervals}
 #' \item{omega}{estimator of the precision matrix of \code{X}}
+#' \item{alpha}{input argument}
 #' @references H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
 #' @examples
 #' \donttest{
@@ -24,11 +25,18 @@
 #' @seealso \link[inferchange]{inferchange}
 #' @importFrom stats cov quantile
 #' @export
-ci_delta <- function(X, y, k, standardize = FALSE, intercept = FALSE,
+ci_delta <- function(X, y, k, standardize = FALSE,
                      delta.hat = NULL, nfolds = 3, nlambdas = 50,
                      alpha = .1,  M = 999, do.split = FALSE){
 
+  stopifnot(is.matrix(X))
   n <- dim(X)[1]; p <- dim(X)[2]
+
+  if(length(y) != n) { stop("Input X should be a matrix of dimensions n x p, and y a vector of length n!") }
+  stopifnot(is.integer(k))
+  if(!do.split && k <= 0 || k >= n) { stop('The change point location k should be between 1 and n - 1') }
+  if(do.split && k <= 1 || k >= n - 1) { stop('The change point location k should be between 2 and n - 2 if do.split = TRUE') }
+  if(alpha < 0 || alpha > 1) { stop('The confidence level alpha should be between 0 and 1') }
 
   if(standarsize) X <- sweep(X, 2, sqrt(colSums(X^2)), "/")
   # if(intercept)
@@ -61,7 +69,7 @@ ci_delta <- function(X, y, k, standardize = FALSE, intercept = FALSE,
   ci <- cbind(delta.check - rr, delta.check + rr)
   colnames(ci) <- c('lower', 'upper')
 
-  out <- list(delta.check = delta.check, ci = ci, omega = omega, qq = qq)
+  out <- list(delta.check = delta.check, delta.hat = delta.hat, ci = ci, omega = omega, alpha = alpha)
   attr(out, "class") <- "inferchange.ci"
   return(out)
 

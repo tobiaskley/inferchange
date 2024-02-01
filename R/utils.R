@@ -29,4 +29,9 @@ print.inferchange.cp <- function(x, ...) {
   cat("Detected", length(x$cp), "change points at", x$cp, "\n")
 }
 
+#' @export
+print.inferchange.ci <- function(x, ...) {
+  cat(paste(100 * x$alpha, "% simultaneous confidence intervals", sep = ''), "\n")
+  x$ci
+}
 
