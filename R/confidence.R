@@ -5,9 +5,9 @@
 #' @param X design matrix with the rows containing the observations
 #' @param y vector of the responses
 #' @param k location of a change point
-#' @param standardize boolean; whether to standardise the matrix \code{X}
+#' @param standardize boolean; if \code{standardize = TRUE}, each column of \code{X} is divided by its L2-norm
 #' @param intercept boolean; whether to include the intercept
-#' @param delta.hat an estimator of the differential parameter; if \code{delta.hat = NULL}, it is generated via \link[inferchange]{lope}
+#' @param delta.hat an estimator of the differential parameter; if \code{delta.hat = NULL}, it is generated via \link[inferchange]{lope} with a tuning parameter generated via cross validation
 #' @param nfolds number of folds for the cross validation when producing an estimator of the precision matrix of \code{X}
 #' @param nlambdas size of the grid of the tuning parameter for the cross validation when producing an estimator of the precision matrix of \code{X}
 #' @param alpha confidence level between 0 and 1
@@ -17,12 +17,12 @@
 #' \item{delta.check}{de-sparsified estimator of the differential parameter}
 #' \item{ci}{matrix containing the lower and the upper bound of the simultaneous confidence intervals}
 #' \item{omega}{estimator of the precision matrix of \code{X}}
-#' @references H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. \it{arXiv preprint}
+#' @references H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
 #' @examples
 #' \donttest{
 #' }
-#' @seealso \link[inferchange]{}
-#' @importFrom stats mean cov quantile svd
+#' @seealso \link[inferchange]{inferchange}
+#' @importFrom stats cov quantile
 #' @export
 ci_delta <- function(X, y, k, standardize = FALSE, intercept = FALSE,
                      delta.hat = NULL, nfolds = 3, nlambdas = 50,
@@ -30,7 +30,7 @@ ci_delta <- function(X, y, k, standardize = FALSE, intercept = FALSE,
 
   n <- dim(X)[1]; p <- dim(X)[2]
 
-  # if(standarsize)
+  if(standarsize) X <- sweep(X, 2, sqrt(colSums(X^2)), "/")
   # if(intercept)
 
   if(do.split){
@@ -62,56 +62,7 @@ ci_delta <- function(X, y, k, standardize = FALSE, intercept = FALSE,
   colnames(ci) <- c('lower', 'upper')
 
   out <- list(delta.check = delta.check, ci = ci, omega = omega, qq = qq)
-  # attr(out, "class") <- "inferchange.ci" # TODO, how to handle that there are multiple change points?
-
-  return(out)
-
-}
-
-#' @importFrom stats mean cov quantile svd
-#' @keywords internal
-ci.delta.internal <- function(X, y, k, delta.hat = NULL, standardize = FALSE, intercept = FALSE,
-                              nfolds = 3, nlambdas = 50,
-                              alpha = .1,  M = 999, do.split = FALSE, do.plot = FALSE){
-
-  n <- dim(X)[1]; p <- dim(X)[2]
-
-  # if(standarsize)
-  # if(intercept)
-
-  if(do.split){
-    ind0 <- which(1:n %% 2 == 0)
-    ind1 <- setdiff(1:n, ind0)
-  } else ind0 <- ind1 <- 1:n
-
-  omega <- omega_est(X[ind0,, drop = FALSE], nfolds = nfolds, nlambdas = nlambdas)$omega
-
-  if(is.null(delta.hat)) delta.hat <- lope(X[ind0,, drop = FALSE], y[ind0], which.min(abs(ind0 - k)), lambdapath = NULL, nfolds = nfolds)
-
-  Sigma <- t(X[ind1,, drop = FALSE]) %*% X[ind1,, drop = FALSE] / length(ind1)
-  gamma_l <- c(y[ind1[ind1 <= k]] %*% X[ind1[ind1 <= k],, drop = FALSE] / sum(ind1 <= k))
-  gamma_r <- c(y[ind1[ind1 > k]] %*% X[ind1[ind1 > k],, drop = FALSE] / sum(ind1 > k))
-
-  delta.check <- delta.hat - omega %*% (Sigma %*% delta.hat - gamma_r + gamma_l)
-
-  u <- X[ind1, ] * 0
-  u[ind1 <= k, ] <- X[ind1[ind1 <= k], ] * c(y[ind1[ind1 <= k]] + k/n * X[ind1[ind1 <= k], ] %*% delta.hat)
-  u[ind1 > k, ] <- X[ind1[ind1 > k], ] * c(y[ind1[ind1 > k]] - (n - k)/n * X[ind1[ind1 > k], ] %*% delta.hat)
-  gamma <- k/n * cov(u[ind1 <= k, ]) + (n - k)/n * cov(u[ind1 > k, ])
-  sv <- svd(gamma, nv = 0)
-  sqrt.gamma <- sv$u %*% diag(sqrt(pmax(sv$d, 0)))
-  v.cov <- omega %*% sqrt.gamma
-
-  ci <- matrix(0, ncol = 2, nrow = p)
-  colnames(ci) <- c('lower', 'upper')
-  if(length(ind) >= 1){
-    tmp <- vcov %*% matrix(stats::rnorm(M * p), nrow = p)
-    qq <- c(apply(abs(tmp[, ind, drop = FALSE]), 2, max), max(abs(delta.check)))
-    rr <- quantile(qq, 1 - alpha/2) * sqrt(n/k/(n - k))
-    ci[ind, ] <- cbind(delta.check[ind] - rr, delta.check[ind] + rr)
-  }
-
-  out <- list(delta.check = delta.check, ci = ci, omega = omega)
+  attr(out, "class") <- "inferchange.ci"
   return(out)
 
 }
