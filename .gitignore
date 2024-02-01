@@ -1,2 +1,5 @@
 .Rproj.user
+src/*.so
+src/*.o
+.DS_Store
 .Rhistory

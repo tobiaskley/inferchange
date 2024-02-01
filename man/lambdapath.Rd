@@ -9,18 +9,21 @@ lambdapath(lambda_max, n, p, K = 100)
 \arguments{
 \item{lambda_max}{TODO Add Description}
 
-\item{n}{TODO Add Description}
+\item{n}{value \code{n}}
 
-\item{p}{TODO Add Description}
+\item{p}{value \code{p}}
 
-\item{K}{TODO Add Description}
+\item{K}{number of lambda values}
 }
 \value{
-TODO Add Description
+vector with lambda values
 }
 \description{
-Find suitable grid of lambda values
+Generates K lambda values from \code{lambda_max} to 0.01 (if \code{n < p}) or 0.0001
+(if \code{n >= p}) in decreasing order that are equaly spaced on the log scale.
+This is the grid of lambda values employed as in \code{glmnet}.
+In applications lambda_max is chosen as
 }
 \examples{
-# TODO Add Example or remove this
+lambdapath(10, 100, 200, K = 5)
 }
