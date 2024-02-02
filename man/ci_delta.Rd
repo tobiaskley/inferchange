@@ -9,7 +9,6 @@ ci_delta(
   y,
   k,
   standardize = FALSE,
-  intercept = FALSE,
   delta.hat = NULL,
   nfolds = 3,
   nlambdas = 50,
@@ -23,13 +22,11 @@ ci_delta(
 
 \item{y}{vector of the responses}
 
-\item{k}{location of a change point}
+\item{k}{index of a single change point; must be an integer between \code{1} and \code{nrow(X) - 1}}
 
-\item{standardize}{boolean; whether to standardise the matrix \code{X}}
+\item{standardize}{boolean; if \code{standardize = TRUE}, each column of \code{X} is divided by its L2-norm}
 
-\item{intercept}{boolean; whether to include the intercept}
-
-\item{delta.hat}{an estimator of the differential parameter; if \code{delta.hat = NULL}, it is generated via \link[inferchange]{lope}}
+\item{delta.hat}{an estimator of the differential parameter; if \code{delta.hat = NULL}, it is generated via \link[inferchange]{lope} with a tuning parameter generated via cross validation}
 
 \item{nfolds}{number of folds for the cross validation when producing an estimator of the precision matrix of \code{X}}
 
@@ -44,8 +41,10 @@ ci_delta(
 \value{
 an S3 object of class \code{inferchange.ci}, which contains the following fields:
 \item{delta.check}{de-sparsified estimator of the differential parameter}
+\item{delta.hat}{original, biased estimator of the differential parameter}
 \item{ci}{matrix containing the lower and the upper bound of the simultaneous confidence intervals}
 \item{omega}{estimator of the precision matrix of \code{X}}
+\item{alpha}{input argument}
 }
 \description{
 Generate a de-sparsified estimator of the differential parameter representing the change in the regression coefficients before and after a change point and,
@@ -55,12 +54,11 @@ based on a Gaussian approximation result, produces a simultaneous confidence int
 See Cho, Kley and Li (2024) for further details.
 }
 \examples{
-\donttest{
-}
+# \donttest{}
 }
 \references{
-H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. \it{arXiv preprint}
+H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
 }
 \seealso{
-\link[inferchange]{}
+\link{inferchange}
 }

@@ -8,7 +8,7 @@
 #' @param k index that splits the n observations into {1, ..., k} and
 #'    {k+1, ..., n}; k takes values in {1, ..., n-1}
 #' @param lambdapath values of lambda to be used when no cross validation is
-#'    is done; vector on non-negative numerics
+#'    is done; vector of non-negative numerics
 #' @param nfolds number of folds to use in cross validation;
 #'    if 0 then no cross validation is used; non-negative integer
 #' @param nlambda number of values on lambdapath for cross validation;
@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' # TODO Add Example or remove this
-lope <- function(X, y, k, lambdapath, nfolds = 0, nlambda = 100) {
+lope <- function(X, y, k, lambdapath, nfolds = 5, nlambda = 100) {
 
   n <- nrow(X)
   p <- ncol(X)

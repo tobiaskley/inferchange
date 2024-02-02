@@ -4,7 +4,7 @@
 \alias{lope}
 \title{Compute LOPE estimator}
 \usage{
-lope(X, y, k, lambdapath, nfolds = 0, nlambda = 100)
+lope(X, y, k, lambdapath, nfolds = 5, nlambda = 100)
 }
 \arguments{
 \item{X}{covariates; n x p matrix}
@@ -15,7 +15,7 @@ lope(X, y, k, lambdapath, nfolds = 0, nlambda = 100)
 {k+1, ..., n}; k takes values in {1, ..., n-1}}
 
 \item{lambdapath}{values of lambda to be used when no cross validation is
-is done; vector on non-negative numerics}
+is done; vector of non-negative numerics}
 
 \item{nfolds}{number of folds to use in cross validation;
 if 0 then no cross validation is used; non-negative integer}

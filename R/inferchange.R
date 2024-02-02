@@ -1,0 +1,60 @@
+
+
+#' Full change point analysis
+#'
+#' @param X Design matrix n x p
+#' @param y Response vector n
+#' @param ... additional parameters that will be forwarded to \code{McScan}
+#'
+#' @return a named list with elements
+#'    \itemize{
+#'      \item \code{cp} detected change points, length q
+#'      \item \code{delta} n times q matrix, j-th column is \eqn{\\delta_j}
+#'      \item \code{ci} n times 2 times q array, \code{ci[,1,j]} and
+#'        \code{ci[,1,j]} are lower and upper bounds of the confidence intervals,
+#'        respectively
+#'    }
+#' @name inferchange
+#' @export
+#'
+#' @examples
+#' old_seed <- .Random.seed
+#' set.seed(12345)
+#' data <- dgp_gauss_sparse(n = 200, p = 20, z = 100, s = 3, rho = 1, sigma = 1)
+#' X <- data$X
+#' y <- data$y
+#' res <- inferchange(X, y)
+#' .Random.seed <- old_seed
+inferchange <- function(X, y, ...) {
+
+  n <- nrow(X)
+  p <- ncol(X)
+  # Step 1: obtain McScan estimates for change locations
+  Theta <- McScan(X, y)$cp # , ...
+
+  a <- c()
+  b <- c()
+  Delta <- c()
+  hat_delta <- matrix(nrow = p, ncol = length(Theta))
+  colnames(hat_delta) <- 1:length(Theta)
+  ci_delta <- array(dim = c(p, 2, length(Theta)))
+  for (j in 1:length(Theta)) {
+    # compute a_j, b_j and Delta_j from eq (9)
+    thjm1 <- c(1, Theta, n)[j]
+    thj   <- c(1, Theta, n)[j+1]
+    thjp1 <- c(1, Theta, n)[j+2]
+    Delta[j] <- min(thj - floor(2 * thjm1 / 3 + thj / 3),
+                    ceiling(thj / 3 + 2 * thjp1 / 3) - thj)
+    a[j] <- thj - Delta[j]
+    b[j] <- thj + Delta[j]
+
+    # estimate differential parameter
+    X0 <- X[(a[j]+1):b[j],]
+    y0 <- y[(a[j]+1):b[j]]
+    k0 <- as.integer(Theta[j] - a[j])
+    hat_delta[, j] <- lope(X0, y0, k0)
+    ci_delta[, , j] <- ci_delta(X = X0, y = y0, k = k0)$ci
+  }
+  return(list(cp = Theta, delta = hat_delta, ci = ci_delta))
+
+}

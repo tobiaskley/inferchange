@@ -5,11 +5,10 @@
 #' @param x \code{inferchange.ci} object
 #' @param ... additional arguments
 #' @return A plot produced as per the input arguments
-#' @seealso \link[inferchange]{ci.delta}
+#' @seealso \link{ci_delta}
 #' @importFrom graphics plot arrows points abline
 #' @examples
-#' \donttest{
-#' }
+#' # \donttest{}
 #' @export
 plot.inferchange.ci <- function(x, ...){
 
@@ -24,6 +23,7 @@ plot.inferchange.ci <- function(x, ...){
 
 }
 
+#' @title Plotting the change points
 #' @param x \code{inferchange.cp} object
 #' @param ... additional arguments
 #' @importFrom graphics abline matplot par

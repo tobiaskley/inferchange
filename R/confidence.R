@@ -20,9 +20,8 @@
 #' \item{alpha}{input argument}
 #' @references H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
 #' @examples
-#' \donttest{
-#' }
-#' @seealso \link[inferchange]{inferchange}
+#' # \donttest{}
+#' @seealso \link{inferchange}
 #' @importFrom stats cov quantile
 #' @export
 ci_delta <- function(X, y, k, standardize = FALSE,
@@ -38,7 +37,7 @@ ci_delta <- function(X, y, k, standardize = FALSE,
   if(do.split && k <= 1 || k >= n - 1) { stop('The change point location k should be between 2 and n - 2 if do.split = TRUE') }
   if(alpha < 0 || alpha > 1) { stop('The confidence level alpha should be between 0 and 1') }
 
-  if(standarsize) X <- sweep(X, 2, sqrt(colSums(X^2)), "/")
+  if(standardize) X <- sweep(X, 2, sqrt(colSums(X^2)), "/")
   # if(intercept)
 
   if(do.split){
@@ -64,7 +63,7 @@ ci_delta <- function(X, y, k, standardize = FALSE,
   v.cov <- omega %*% sv$u %*% diag(sqrt(pmax(sv$d, 0)))
 
   tmp <- v.cov %*% matrix(stats::rnorm(M * p), nrow = p)
-  qq <- c(apply(abs(tmp[, ind, drop = FALSE]), 2, max), max(abs(delta.check)))
+  qq <- c(apply(abs(tmp), 2, max), max(abs(delta.check)))
   rr <- quantile(qq, 1 - alpha/2) * sqrt(n/k/(n - k))
   ci <- cbind(delta.check - rr, delta.check + rr)
   colnames(ci) <- c('lower', 'upper')
