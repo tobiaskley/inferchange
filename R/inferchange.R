@@ -51,9 +51,9 @@ inferchange <- function(X, y, ...) {
   ci_delta <- array(dim = c(p, 2, length(Theta)))
   for (j in 1:length(Theta)) {
     # compute a_j, b_j and Delta_j from eq (9)
-    thjm1 <- c(1, Theta, n)[j]
-    thj   <- c(1, Theta, n)[j+1]
-    thjp1 <- c(1, Theta, n)[j+2]
+    thjm1 <- c(0, Theta, n)[j]
+    thj   <- c(0, Theta, n)[j+1]
+    thjp1 <- c(0, Theta, n)[j+2]
     Delta[j] <- min(thj - floor(2 * thjm1 / 3 + thj / 3),
                     ceiling(thj / 3 + 2 * thjp1 / 3) - thj)
     a[j] <- thj - Delta[j]
