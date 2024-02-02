@@ -1,7 +1,12 @@
-#' @title Simultaneous confidence intervals for the differential parameter
-#' @description Generate a de-sparsified estimator of the differential parameter representing the change in the regression coefficients before and after a change point and,
-#' based on a Gaussian approximation result, produces a simultaneous confidence interval at a given level.
-#' @details See Cho, Kley and Li (2024) for further details.
+#' Simultaneous confidence intervals for the differential parameter
+#' 
+#' Generate a de-sparsified estimator of the differential parameter 
+#' representing the change in the regression coefficients before and 
+#' after a change point and, based on a Gaussian approximation result, 
+#' produces a simultaneous confidence interval at a given level.
+#' 
+#' See Cho, Kley and Li (2024) for further details.
+#' 
 #' @param X design matrix with the rows containing the observations
 #' @param y vector of the responses
 #' @param k index of a single change point; must be an integer between \code{1} and \code{nrow(X) - 1}
@@ -20,8 +25,15 @@
 #' \item{alpha}{input argument}
 #' @references H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
 #' @examples
-#' # \donttest{}
-#' @seealso \link{inferchange}
+#' old_seed <- .Random.seed
+#' set.seed(12345)
+#' data <- dgp_gauss_sparse(n = 200, p = 20, z = 100, s = 3, rho = 1, sigma = 1)
+#' X <- data$X
+#' y <- data$y
+#' ci <- ci_delta(X, y, 100)
+#' print(ci)
+#' plot(ci)
+#' 
 #' @importFrom stats cov quantile
 #' @export
 ci_delta <- function(X, y, k, standardize = FALSE,
