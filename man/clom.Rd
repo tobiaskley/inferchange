@@ -4,7 +4,7 @@
 \alias{clom}
 \title{Compute CLOM estimator}
 \usage{
-clom(X, y, k, lambdapath, nfolds = 5, nlambda = 100)
+clom(X, y, k, lambdapath = NULL, nfolds = 5, nlambda = 100)
 }
 \arguments{
 \item{X}{covariates; n x p matrix}
@@ -14,8 +14,9 @@ clom(X, y, k, lambdapath, nfolds = 5, nlambda = 100)
 \item{k}{index that splits the n observations into {1, ..., k} and
 {k+1, ..., n}; k takes values in {1, ..., n-1}}
 
-\item{lambdapath}{values of lambda to be used when no cross validation is
-is done; vector of non-negative numerics}
+\item{lambdapath}{A user supplied lambda sequence,
+only used when no cross validation is done / ignored when nfolds > 1;
+vector of non-negative numerics}
 
 \item{nfolds}{number of folds to use in cross validation;
 if 0 then no cross validation is used; non-negative integer}
@@ -24,10 +25,22 @@ if 0 then no cross validation is used; non-negative integer}
 default 100}
 }
 \value{
-TODO Add Description
+a vector of length p with cross-validation estimate or a
+p x length(lambdapath) matrix with the j-th column corresponding to the
+j-th value in lambdapath
 }
 \description{
-TODO: Description of Details
+Computes the CLOM estimator \eqn{\\hat\\delta_{0,n}(k)}
+defined in eqn. (8) of Section 3.1 in Cho et al. (2024).
+}
+\details{
+By default cross-validation is performed and the cross-validation estimate
+is returned. for cross-validation the estimates are obtained for all
+values of lambda on the lambdapath obtained with \code{\link[=lambdapath]{lambdapath()}}.
+
+If \code{nfolds = 0} is set then the argument \code{lambdapath} has to be
+a vector of positive numerics and the estimates for these values of lambda
+will be returned.
 }
 \examples{
 # TODO Add Example or remove this

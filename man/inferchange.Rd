@@ -11,7 +11,7 @@ inferchange(X, y, ...)
 
 \item{y}{Response vector n}
 
-\item{...}{additional parameters that will be forwarded to \code{McScan}}
+\item{...}{additional parameters that will be forwarded to \code{[McScan]}}
 }
 \value{
 a named list with elements
@@ -24,7 +24,17 @@ respectively
 }
 }
 \description{
-Full change point analysis
+This is the \code{workhorse} function that implements all of the methodology
+developed in Cho et al. (2024).
+}
+\details{
+The following steps are applied:
+\itemize{
+\item McScan algorithm, cf. Section 2.1 in Cho et al. (2024),
+\item LOPE estimator \eqn{\\hat\\delta_j}, cf. Section 3.1 in Cho et al. (2024),
+\item confidence intervals \eqn{\\C_{ij}(0.05)}, cf. eqn (14),
+Section 3.2.2 in Cho et al. (2024).
+}
 }
 \examples{
 old_seed <- .Random.seed

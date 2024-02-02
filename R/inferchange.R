@@ -2,9 +2,20 @@
 
 #' Full change point analysis
 #'
+#' This is the `workhorse` function that implements all of the methodology
+#' developed in Cho et al. (2024).
+#'
+#' The following steps are applied:
+#' \itemize{
+#'  \item McScan algorithm, cf. Section 2.1 in Cho et al. (2024),
+#'  \item LOPE estimator \eqn{\\hat\\delta_j}, cf. Section 3.1 in Cho et al. (2024),
+#'  \item confidence intervals \eqn{\\C_{ij}(0.05)}, cf. eqn (14),
+#'    Section 3.2.2 in Cho et al. (2024).
+#' }
+#'
 #' @param X Design matrix n x p
 #' @param y Response vector n
-#' @param ... additional parameters that will be forwarded to \code{McScan}
+#' @param ... additional parameters that will be forwarded to \code{[McScan]}
 #'
 #' @return a named list with elements
 #'    \itemize{
