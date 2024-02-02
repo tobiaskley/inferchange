@@ -24,9 +24,14 @@ plot.inferchange.ci <- function(x, ...){
 }
 
 #' @title Plotting the change points
+#'
 #' @param x \code{inferchange.cp} object
 #' @param ... additional arguments
+#'
 #' @importFrom graphics abline matplot par
+#' @import ggplot2
+#' @importFrom viridis scale_fill_viridis
+#'
 #' @export
 plot.inferchange.cp <- function(x, ...) {
   Xy = attr(x,"X") * matrix(attr(x,"y"), nrow = nrow(attr(x,"X")),
