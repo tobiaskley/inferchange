@@ -73,7 +73,14 @@
 #'
 #' @importFrom stats mad
 #' @examples
-#' # TODO Add Example or remove this
+#' n = 300
+#' p = 100
+#' s = 10
+#' z = n/3
+#' set.seed(123)
+#' data = dgp_gauss_sparse(n, p, z, s)
+#' est_cps = McScan(data$X, data$y) # default with fixed threshold
+#' plot(est_cps)
 McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
                    bnd = max(round(min(2*log(length(X)), length(y)/2)), 5),
                    standardize = FALSE, post = TRUE) {
