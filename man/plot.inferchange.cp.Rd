@@ -2,11 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{plot.inferchange.cp}
 \alias{plot.inferchange.cp}
-<<<<<<< Updated upstream
-\title{Plotting the change points}
-=======
 \title{Plotting the segmentation result returned by \code{McScan}}
->>>>>>> Stashed changes
 \usage{
 \method{plot}{inferchange.cp}(x, ...)
 }
@@ -16,9 +12,5 @@
 \item{...}{additional arguments}
 }
 \description{
-<<<<<<< Updated upstream
-Plotting the change points
-=======
 Plotting the segmentation result returned by \code{McScan}
->>>>>>> Stashed changes
 }

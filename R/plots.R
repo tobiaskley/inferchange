@@ -23,24 +23,17 @@ plot.inferchange.ci <- function(x, ...){
 
 }
 
-<<<<<<< Updated upstream
-#' @title Plotting the change points
-=======
-#' @title Plotting the segmentation result returned by \code{McScan}
->>>>>>> Stashed changes
+#' @title Plotting the segmentation result
+#'
+#' @description
+#' Plotting the segmentation result, which is of class \code{inferchange.cp},
+#' e.g. returned by function \code{McScan}
+#'
 #'
 #' @param x \code{inferchange.cp} object
 #' @param ... additional arguments
 #'
-#' @importFrom graphics abline matplot par
-<<<<<<< Updated upstream
 #' @import ggplot2
-#' @importFrom viridis scale_fill_viridis
-#'
-=======
-#' @importFrom ggplot2 ggplot geom_line geom_count geom_point theme
-#' @importFrom ggplot2 scale_size_continuous xlab ylab guides theme_minimal
->>>>>>> Stashed changes
 #' @export
 plot.inferchange.cp <- function(x, ...) {
   Xy = attr(x,"X") * matrix(attr(x,"y"), nrow = nrow(attr(x,"X")),
@@ -48,7 +41,7 @@ plot.inferchange.cp <- function(x, ...) {
   df = expand.grid(sample_index=1:n, coordinate=1:p)
   df$covariance = as.vector(Xy)
   plt = ggplot(df, aes(sample_index, coordinate, fill = covariance)) +
-    geom_tile() + scale_fill_viridis() +
+    geom_tile() +
     theme_minimal() + geom_vline(xintercept = x$cp)
   print(plt)
   if (!is.null(attr(x, "solution_path"))) {
