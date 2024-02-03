@@ -47,8 +47,11 @@
 }
 
 
-#' @title Multiscale covariance scanning for data segmentation described in
-#' Section 2.1 of Cho et al. (2024)
+#' @title Multiscale covariance scanning for data segmentation
+#'
+#' @description
+#' The formal definition is given in Section 2.1 of Cho et al. (2024).
+#'
 #'
 #' @param X Design matrix n x p
 #' @param y Response vector n
@@ -56,10 +59,11 @@
 #'            overrides the input \code{thd}
 #' @param thd Stopping threshold, default log(n*p)/2
 #' @param method \code{"not"}  NOT (default) with fixed threshold \code{thd}
-#'               \code{"auto"} NOT with automatic threshold (overrides \code{ncp} and \code{thd})
+#'               \code{"auto"} NOT with automatic threshold
+#'                             (overrides \code{ncp} and \code{thd})
 #'               \code{"wbs"}  wild binary segmentation with seeded intervals
 #'               \code{"bs"}   binary segmentation
-#' @param standardise Logical, standardising every coordinate or not
+#' @param standardize Logical, standardizing every coordinate or not
 #'                    Default TRUE when \code{thd} is in action
 #' @param bnd At least \code{bnd} away from boundaries of intervals
 #' @param post Logical, post processing (default) or not
@@ -72,7 +76,8 @@
 #' # TODO Add Example or remove this
 McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
                    bnd = max(round(min(2*log(length(X)), length(y)/2)), 5),
-                   standardise = FALSE, post = TRUE) {
+                   standardize = FALSE, post = TRUE) {
+  rescale = FALSE
   # Check inputs
   stopifnot(is.matrix(X))
   n = nrow(X)
@@ -89,7 +94,7 @@ McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
         thd = log(n*p)/2
         cat('Default threshold log(n*p)/2 is used!\n')
       }
-      standardise = TRUE
+      rescale = TRUE
     } else {
       stopifnot(ncp > 0 && ncp == round(ncp))
       if (!missing(thd)) { warning("Input 'thd' is ignored!") }
@@ -99,8 +104,9 @@ McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
   }
 
   # Pre-computation
+  if (standardize) { X = sweep(X, 2, sqrt(colSums(X^2)), "/") }
   M  = X * matrix(as.array(y), nrow = n, ncol = p)
-  if (standardise) {
+  if (rescale) {
     M = sweep(M, 2, apply(M, 2, function(x) {mad(diff(x))/sqrt(2)}), "/")
   }
   CS = apply(M, 2, cumsum)
