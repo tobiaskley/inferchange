@@ -1,4 +1,3 @@
-
 #' Generate a simulated data set
 #'
 #' @param n number of observations
@@ -15,7 +14,7 @@
 #'
 #' @examples
 #' data <- dgp_gauss_sparse(n = 20, p = 20, z = 10, s = 3, rho = 1, sigma = 1)
-dgp_gauss_sparse <- function(n, p, z, s, rho, sigma = 1) {
+dgp_gauss_sparse <- function(n, p, z, s, rho = 1, sigma = 1) {
 
   X  <- matrix(rnorm(n * p), nrow = n, ncol = p)
   mu <- matrix(0, nrow = p)
