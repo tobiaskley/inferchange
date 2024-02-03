@@ -2,22 +2,26 @@
 % Please edit documentation in R/interval.R
 \name{seeded_interval}
 \alias{seeded_interval}
-\title{Interval Function in Fortran}
+\title{Generating Seeded Intervals}
 \usage{
 seeded_interval(n, dec = sqrt(2), minl = 2)
 }
 \arguments{
-\item{n}{Interval length > 2}
+\item{n}{Interval length > 2.}
 
-\item{dec}{Decay rate: Rate of how fast the different layers will decrease in size. Default is set to sqrt(2).}
+\item{dec}{Decay rate: Rate of how fast the different layers will decrease in
+size. Default is set to sqrt(2).}
 
-\item{minl}{Minimal theoretical interval-length: The minimal size of intervals to be considered. Default is set to 2.}
+\item{minl}{Minimal theoretical interval-length: The minimal size of
+intervals to be considered. Default is set to 2.}
 }
 \value{
-A 2-column matrix with all the start- and endpoints of the generated intervals
+A 2-column matrix with all the start- and endpoints of the generated
+intervals
 }
 \description{
-Interval Function in Fortran
+It wraps an efficient implementation in Fortran. This function is a copy of
+\code{interval} from https://github.com/kovacssolt/ChangePoints.
 }
 \examples{
 \donttest{

@@ -16,30 +16,31 @@ McScan(
 )
 }
 \arguments{
-\item{X}{Design matrix n x p}
+\item{X}{Design matrix n x p.}
 
-\item{y}{Response vector n}
+\item{y}{Response vector n.}
 
 \item{ncp}{Specifies the number of estimated change points, and
-overrides the input \code{thd}}
+overrides the input \code{thd}.}
 
-\item{thd}{Stopping threshold, default log(n*p)/2}
+\item{thd}{Stopping threshold, default log(n*p)/2.}
 
-\item{method}{\code{"not"}  NOT (default) with fixed threshold \code{thd}
+\item{method}{\code{"not"}  NOT (default) with fixed threshold \code{thd}.
 \code{"auto"} NOT with automatic threshold
-(overrides \code{ncp} and \code{thd})
-\code{"wbs"}  wild binary segmentation with seeded intervals
-\code{"bs"}   binary segmentation}
+(overrides \code{ncp} and \code{thd}).
+\code{"wbs"}  wild binary segmentation with seeded intervals.
+\code{"bs"}   binary segmentation.}
 
-\item{bnd}{At least \code{bnd} away from boundaries of intervals}
+\item{bnd}{At least \code{bnd} away from boundaries of intervals.}
 
-\item{standardize}{Logical, standardizing every coordinate or not
-Default TRUE when \code{thd} is in action}
+\item{standardize}{Logical, standardizing every coordinate or not.
+Default TRUE when \code{thd} is in action.}
 
-\item{post}{Logical, post processing (default) or not}
+\item{post}{Logical, post processing (default) or not.}
 }
 \value{
-A list of class \code{inferchange.cp} with \code{print} and \code{plot}
+A list of class \code{inferchange.cp} with \code{print} and
+\code{plot} functions.
 }
 \description{
 The formal definition is given in Section 2.1 of Cho et al. (2024).
