@@ -2,8 +2,7 @@
 % Please edit documentation in R/McScan.R
 \name{McScan}
 \alias{McScan}
-\title{Multiscale covariance scanning for data segmentation described in
-Section 2.1 of Cho et al. (2024)}
+\title{Multiscale covariance scanning for data segmentation}
 \usage{
 McScan(
   X,
@@ -12,7 +11,7 @@ McScan(
   thd,
   method = c("not", "auto", "wbs", "bs"),
   bnd = max(round(min(2 * log(length(X)), length(y)/2)), 5),
-  standardise = FALSE,
+  standardize = FALSE,
   post = TRUE
 )
 }
@@ -27,13 +26,14 @@ overrides the input \code{thd}}
 \item{thd}{Stopping threshold, default log(n*p)/2}
 
 \item{method}{\code{"not"}  NOT (default) with fixed threshold \code{thd}
-\code{"auto"} NOT with automatic threshold (overrides \code{ncp} and \code{thd})
+\code{"auto"} NOT with automatic threshold
+(overrides \code{ncp} and \code{thd})
 \code{"wbs"}  wild binary segmentation with seeded intervals
 \code{"bs"}   binary segmentation}
 
 \item{bnd}{At least \code{bnd} away from boundaries of intervals}
 
-\item{standardise}{Logical, standardising every coordinate or not
+\item{standardize}{Logical, standardizing every coordinate or not
 Default TRUE when \code{thd} is in action}
 
 \item{post}{Logical, post processing (default) or not}
@@ -42,9 +42,15 @@ Default TRUE when \code{thd} is in action}
 A list of class \code{inferchange.cp} with \code{print} and \code{plot}
 }
 \description{
-Multiscale covariance scanning for data segmentation described in
-Section 2.1 of Cho et al. (2024)
+The formal definition is given in Section 2.1 of Cho et al. (2024).
 }
 \examples{
-# TODO Add Example or remove this
+n = 300
+p = 100
+s = 10
+z = n/3
+set.seed(123)
+data = dgp_gauss_sparse(n, p, z, s)
+est_cps = McScan(data$X, data$y) # default with fixed threshold
+plot(est_cps)
 }

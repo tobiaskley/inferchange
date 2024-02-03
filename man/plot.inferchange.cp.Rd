@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{plot.inferchange.cp}
 \alias{plot.inferchange.cp}
-\title{Plotting the segmentation result returned by \code{McScan}}
+\title{Plotting the segmentation result}
 \usage{
 \method{plot}{inferchange.cp}(x, ...)
 }
@@ -12,5 +12,6 @@
 \item{...}{additional arguments}
 }
 \description{
-Plotting the segmentation result returned by \code{McScan}
+Plotting the segmentation result, which is of class \code{inferchange.cp},
+e.g. returned by function \code{McScan}
 }

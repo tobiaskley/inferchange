@@ -4,7 +4,7 @@
 \alias{dgp_gauss_sparse}
 \title{Generate a simulated data set}
 \usage{
-dgp_gauss_sparse(n, p, z, s, rho, sigma = 1)
+dgp_gauss_sparse(n, p, z, s, rho = 1, sigma = 1)
 }
 \arguments{
 \item{n}{number of observations}
