@@ -23,15 +23,24 @@ plot.inferchange.ci <- function(x, ...){
 
 }
 
+<<<<<<< Updated upstream
 #' @title Plotting the change points
+=======
+#' @title Plotting the segmentation result returned by \code{McScan}
+>>>>>>> Stashed changes
 #'
 #' @param x \code{inferchange.cp} object
 #' @param ... additional arguments
 #'
 #' @importFrom graphics abline matplot par
+<<<<<<< Updated upstream
 #' @import ggplot2
 #' @importFrom viridis scale_fill_viridis
 #'
+=======
+#' @importFrom ggplot2 ggplot geom_line geom_count geom_point theme
+#' @importFrom ggplot2 scale_size_continuous xlab ylab guides theme_minimal
+>>>>>>> Stashed changes
 #' @export
 plot.inferchange.cp <- function(x, ...) {
   Xy = attr(x,"X") * matrix(attr(x,"y"), nrow = nrow(attr(x,"X")),
