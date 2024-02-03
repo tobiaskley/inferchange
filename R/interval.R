@@ -1,9 +1,15 @@
-#' Interval Function in Fortran
+#' Generating Seeded Intervals
 #'
-#' @param n Interval length > 2
-#' @param dec Decay rate: Rate of how fast the different layers will decrease in size. Default is set to sqrt(2).
-#' @param minl Minimal theoretical interval-length: The minimal size of intervals to be considered. Default is set to 2.
-#' @return A 2-column matrix with all the start- and endpoints of the generated intervals
+#' It wraps an efficient implementation in Fortran. This function is a copy of
+#' \code{interval} from https://github.com/kovacssolt/ChangePoints.
+#'
+#' @param n Interval length > 2.
+#' @param dec Decay rate: Rate of how fast the different layers will decrease in
+#'            size. Default is set to sqrt(2).
+#' @param minl Minimal theoretical interval-length: The minimal size of
+#'             intervals to be considered. Default is set to 2.
+#' @return A 2-column matrix with all the start- and endpoints of the generated
+#'         intervals
 #' @examples
 #' \donttest{
 #' seeded_interval(10)
