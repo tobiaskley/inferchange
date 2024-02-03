@@ -1,12 +1,12 @@
 #' Simultaneous confidence intervals for the differential parameter
-#' 
-#' Generate a de-sparsified estimator of the differential parameter 
-#' representing the change in the regression coefficients before and 
-#' after a change point and, based on a Gaussian approximation result, 
+#'
+#' Generate a de-sparsified estimator of the differential parameter
+#' representing the change in the regression coefficients before and
+#' after a change point and, based on a Gaussian approximation result,
 #' produces a simultaneous confidence interval at a given level.
-#' 
+#'
 #' See Cho, Kley and Li (2024) for further details.
-#' 
+#'
 #' @param X design matrix with the rows containing the observations
 #' @param y vector of the responses
 #' @param k index of a single change point; must be an integer between \code{1} and \code{nrow(X) - 1}
@@ -33,7 +33,7 @@
 #' ci <- ci_delta(X, y, 100)
 #' print(ci)
 #' plot(ci)
-#' 
+#'
 #' @importFrom stats cov quantile
 #' @export
 ci_delta <- function(X, y, k, standardize = FALSE,
@@ -44,7 +44,7 @@ ci_delta <- function(X, y, k, standardize = FALSE,
   n <- dim(X)[1]; p <- dim(X)[2]
 
   if(length(y) != n) { stop("Input X should be a matrix of dimensions n x p, and y a vector of length n!") }
-  stopifnot(is.integer(k))
+  stopifnot(is.numeric(k) && (k == round(k)) && k >= 1 && k <= n)
   if(!do.split && (k <= 0 || k >= n)) { stop('The change point location k should be between 1 and n - 1') }
   if(do.split && (k <= 1 || k >= n - 1)) { stop('The change point location k should be between 2 and n - 2 if do.split = TRUE') }
   if(alpha < 0 || alpha > 1) { stop('The confidence level alpha should be between 0 and 1') }

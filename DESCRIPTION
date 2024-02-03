@@ -15,8 +15,7 @@ Description: Implements function for inference of changes in high-dimensional
 Imports:
   ggplot2,
   glmnet,
-  PRIMAL,
-  viridis
+  PRIMAL
 License: GPL (>= 3)
 URL: http://github.com/inferchange/quantspec
 BugReports: http://github.com/tobiaskley/inferchange/issues

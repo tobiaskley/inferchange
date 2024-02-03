@@ -10,12 +10,15 @@
 #'
 #' If \code{nfolds = 0} is set then the argument \code{lambdapath} has to be
 #' a vector of positive numerics and the estimates for these values of lambda
-#' will be returned.
+#' will be returned. In preprocessing, \code{lambdapath} is sorted to be in
+#' decreasing order.
 #'
 #' @param X covariates; n x p matrix
 #' @param y response; n vector
 #' @param k index that splits the n observations into {1, ..., k} and
 #'    {k+1, ..., n}; k takes values in {1, ..., n-1}
+#' @param standardize boolean; if \code{standardize = TRUE}, each column of
+#'    \code{X} is divided by its L2-norm
 #' @param lambdapath A user supplied lambda sequence,
 #'    only used when no cross validation is done / ignored when nfolds > 1;
 #'    vector of non-negative numerics
@@ -24,19 +27,28 @@
 #' @param nlambda number of values on lambdapath for cross validation;
 #'    default 100
 #'
-#' @return a vector of length p with cross-validation estimate or a
-#'    p x length(lambdapath) matrix with the j-th column corresponding to the
-#'    j-th largest value in lambdapath
+#' @return a matrix with p rows and with one (in case of cross-validation) or
+#'    length(lambdapath) colummns;
+#'    each column corresponds to the estimate obtained for one value of lambda
+#'    the values of lambda are available as colnames.
 #' @export
 #'
 #' @importFrom glmnet glmnet cv.glmnet
 #'
 #' @examples
 #' # TODO Add Example or remove this
-lope <- function(X, y, k, lambdapath = NULL, nfolds = 5, nlambda = 100) {
+lope <- function(X, y, k, standardize = FALSE,
+                 lambdapath = NULL, nfolds = 5, nlambda = 100) {
 
-  n <- nrow(X)
-  p <- ncol(X)
+  # Check inputs
+  stopifnot(is.matrix(X))
+  n = nrow(X)
+  p = ncol(X)
+  if (length(y) != n) { stop("Input X should be of dim n x p, and y of n!") }
+  stopifnot(is.numeric(k) && (k == round(k)) && k >= 1 && k <= n)
+
+  # Pre-computation
+  if (standardize) { X = sweep(X, 2, sqrt(colSums(X^2)), "/") }
 
   # proper scaling
   y[1:k] = y[1:k]*(n/k)
@@ -49,12 +61,15 @@ lope <- function(X, y, k, lambdapath = NULL, nfolds = 5, nlambda = 100) {
     lasso1.all = glmnet::glmnet(X, y, alpha = 1, standardize = FALSE, intercept = FALSE,
                         lambda = lambdapath)
     delta1.all <- as.matrix(lasso1.all$beta)
+    colnames(delta1.all) <- sort(lambdapath, decreasing = TRUE)
   } else {
     cv.mod = glmnet::cv.glmnet(X, y, alpha = 1, standardize = FALSE, intercept = FALSE,
                        foldid = rep(1:nfolds, length.out = n))
     lasso.mod = glmnet::glmnet(X, y, alpha = 1, standardize = TRUE, intercept = FALSE,
                        lambda = cv.mod$lambda.min)
-    delta1.all <- as.numeric(lasso.mod$beta)
+    delta1.all <- matrix(lasso.mod$beta, ncol = 1)
+    colnames(delta1.all) <- cv.mod$lambda.min
+
   }
 
   return(delta1.all)

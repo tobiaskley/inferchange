@@ -66,6 +66,22 @@ inferchange <- function(X, y, ...) {
     hat_delta[, j] <- lope(X0, y0, k0)
     ci_delta[, , j] <- ci_delta(X = X0, y = y0, k = k0)$ci
   }
-  return(list(cp = Theta, delta = hat_delta, ci = ci_delta))
+  ret <- list(cp    = Theta,
+              delta = hat_delta,
+              ci = ci_delta)
+  class(ret) <- "inferchange"
+  return(ret)
 
+}
+
+#' @importFrom utils head
+#' @export
+print.inferchange <- function(x, ...) {
+  cat("Detected", length(x$cp), "change points at", x$cp, "\n")
+  for(j in 1:length(x$cp)) {
+    cat("First entries for LOPE estimate and CI for change point ", j, "\n")
+    M <- cbind(x$delta[,j], x$ci[,,j])
+    colnames(M) <- c("LOPE", "CI-lower", "CI-upper")
+    print(head(M))
+  }
 }

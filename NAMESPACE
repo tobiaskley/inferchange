@@ -2,6 +2,7 @@
 
 S3method(plot,inferchange.ci)
 S3method(plot,inferchange.cp)
+S3method(print,inferchange)
 S3method(print,inferchange.ci)
 S3method(print,inferchange.cp)
 export(McScan)
@@ -26,4 +27,5 @@ importFrom(stats,mad)
 importFrom(stats,quantile)
 importFrom(stats,rnorm)
 importFrom(stats,runif)
+importFrom(utils,head)
 useDynLib(inferchange)

@@ -4,7 +4,15 @@
 \alias{lope}
 \title{Compute LOPE estimator}
 \usage{
-lope(X, y, k, lambdapath = NULL, nfolds = 5, nlambda = 100)
+lope(
+  X,
+  y,
+  k,
+  standardize = FALSE,
+  lambdapath = NULL,
+  nfolds = 5,
+  nlambda = 100
+)
 }
 \arguments{
 \item{X}{covariates; n x p matrix}
@@ -13,6 +21,9 @@ lope(X, y, k, lambdapath = NULL, nfolds = 5, nlambda = 100)
 
 \item{k}{index that splits the n observations into {1, ..., k} and
 {k+1, ..., n}; k takes values in {1, ..., n-1}}
+
+\item{standardize}{boolean; if \code{standardize = TRUE}, each column of
+\code{X} is divided by its L2-norm}
 
 \item{lambdapath}{A user supplied lambda sequence,
 only used when no cross validation is done / ignored when nfolds > 1;
@@ -25,9 +36,10 @@ if 0 then no cross validation is used; non-negative integer}
 default 100}
 }
 \value{
-a vector of length p with cross-validation estimate or a
-p x length(lambdapath) matrix with the j-th column corresponding to the
-j-th largest value in lambdapath
+a matrix with p rows and with one (in case of cross-validation) or
+length(lambdapath) colummns;
+each column corresponds to the estimate obtained for one value of lambda
+the values of lambda are available as colnames.
 }
 \description{
 Computes the LOPE estimator \eqn{\\hat\\delta_{0,n}(k)}
@@ -40,7 +52,8 @@ values of lambda on the lambdapath obtained with \code{\link[=lambdapath]{lambda
 
 If \code{nfolds = 0} is set then the argument \code{lambdapath} has to be
 a vector of positive numerics and the estimates for these values of lambda
-will be returned.
+will be returned. In preprocessing, \code{lambdapath} is sorted to be in
+decreasing order.
 }
 \examples{
 # TODO Add Example or remove this
