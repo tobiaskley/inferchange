@@ -47,28 +47,28 @@
 }
 
 
-#' @title Multiscale covariance scanning for data segmentation
+#' Multiscale covariance scanning for data segmentation
 #'
-#' @description
 #' The formal definition is given in Section 2.1 of Cho et al. (2024).
 #'
 #'
-#' @param X Design matrix n x p
-#' @param y Response vector n
+#' @param X Design matrix n x p.
+#' @param y Response vector n.
 #' @param ncp Specifies the number of estimated change points, and
-#'            overrides the input \code{thd}
-#' @param thd Stopping threshold, default log(n*p)/2
-#' @param method \code{"not"}  NOT (default) with fixed threshold \code{thd}
+#'            overrides the input \code{thd}.
+#' @param thd Stopping threshold, default log(n*p)/2.
+#' @param method \code{"not"}  NOT (default) with fixed threshold \code{thd}.
 #'               \code{"auto"} NOT with automatic threshold
-#'                             (overrides \code{ncp} and \code{thd})
-#'               \code{"wbs"}  wild binary segmentation with seeded intervals
-#'               \code{"bs"}   binary segmentation
-#' @param standardize Logical, standardizing every coordinate or not
-#'                    Default TRUE when \code{thd} is in action
-#' @param bnd At least \code{bnd} away from boundaries of intervals
-#' @param post Logical, post processing (default) or not
+#'                             (overrides \code{ncp} and \code{thd}).
+#'               \code{"wbs"}  wild binary segmentation with seeded intervals.
+#'               \code{"bs"}   binary segmentation.
+#' @param standardize Logical, standardizing every coordinate or not.
+#'                    Default TRUE when \code{thd} is in action.
+#' @param bnd At least \code{bnd} away from boundaries of intervals.
+#' @param post Logical, post processing (default) or not.
 #'
-#' @return A list of class \code{inferchange.cp} with \code{print} and \code{plot}
+#' @return A list of class \code{inferchange.cp} with \code{print} and
+#'         \code{plot} functions.
 #' @export
 #'
 #' @importFrom stats mad
