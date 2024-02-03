@@ -47,18 +47,25 @@ an S3 object of class \code{inferchange.ci}, which contains the following fields
 \item{alpha}{input argument}
 }
 \description{
-Generate a de-sparsified estimator of the differential parameter representing the change in the regression coefficients before and after a change point and,
-based on a Gaussian approximation result, produces a simultaneous confidence interval at a given level.
+Generate a de-sparsified estimator of the differential parameter
+representing the change in the regression coefficients before and
+after a change point and, based on a Gaussian approximation result,
+produces a simultaneous confidence interval at a given level.
 }
 \details{
 See Cho, Kley and Li (2024) for further details.
 }
 \examples{
-# \donttest{}
+old_seed <- .Random.seed
+set.seed(12345)
+data <- dgp_gauss_sparse(n = 200, p = 20, z = 100, s = 3, rho = 1, sigma = 1)
+X <- data$X
+y <- data$y
+ci <- ci_delta(X, y, 100)
+print(ci)
+plot(ci)
+
 }
 \references{
 H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
-}
-\seealso{
-\link{inferchange}
 }
