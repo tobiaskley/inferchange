@@ -36,13 +36,18 @@ plot.inferchange.ci <- function(x, ...){
 #' @import ggplot2
 #' @export
 plot.inferchange.cp <- function(x, ...) {
-  Xy = attr(x,"X") * matrix(attr(x,"y"), nrow = nrow(attr(x,"X")),
-                            ncol = ncol(attr(x,"X")))
-  df = expand.grid(sample_index=1:n, coordinate=1:p)
-  df$covariance = as.vector(Xy)
-  plt = ggplot(df, aes(sample_index, coordinate, fill = covariance)) +
-    geom_tile() +
-    theme_minimal() + geom_vline(xintercept = x$cp)
+  X = attr(x, "X")
+  y = attr(x, "y")
+  n = nrow(X)
+  p = ncol(X)
+  Xy =  X * matrix(y, nrow = n, ncol = p)
+  plt = ggplot(data.frame(sample_index = rep(1:n, p),
+                          covariance = as.vector(Xy)),
+               aes(x = sample_index, y = covariance)) +
+    geom_line(color="gray")  +
+    geom_vline(xintercept = x$cp, linetype = "dashed", color = "red") +
+    xlab("Index of sample") + ylab("Covariance of X and y (gray lines)") + theme_minimal() +
+    ggtitle("Estimated change points (red dashed vertical lines)")
   print(plt)
   if (!is.null(attr(x, "solution_path"))) {
     sopa = attr(x, "solution_path")
