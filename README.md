@@ -11,7 +11,7 @@ Currently, the methodology described in the following pre-print is implemented:
 
 * Cho, H., Kley, T., and Li, H. (2024). Detection and inference of changes in
   high-dimensional linear regression with non-sparse structures
-  (cf. \url{http://arxiv.org/abs/????.?????}).
+  (cf. [http://arxiv.org/abs/????.?????}]).
 
 
 ## Getting started with ``inferchange``
@@ -23,7 +23,7 @@ the following commands on the R shell:
 
  ```
  install.packages("devtools")
- devtools::install_github("tobiaskley/inferchange", ref="develop")
+ devtools::install_github("tobiaskley/inferchange")
  ```
 
 This will first install the R package ``devtools`` and then use it to install
@@ -38,13 +38,13 @@ help("inferchange")
 ```
 
 At the bottom of the online help page to the package you will find an index to
-all the help files available. The main functions are `McScan', `LOPE', `CLOM'
+all the help files available. The main functions are `McScan', `lope', `clom'
 and `ci_delta'. The respective help pages can be accessed by
 
 ```
 help("McScan")
-help("LOPE")
-help("CLOM")
+help("lope")
+help("clom")
 help("ci_delta")
 ```
 
