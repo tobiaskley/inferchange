@@ -1,11 +1,10 @@
-#' @keywords internal
 "_PACKAGE"
 
 ################################################################################
 #' Multiscale Covariance Scanning and Related Algorithms
 #'
 #' Implements function for inference of changes in high-dimensional
-#' linear regression; cf. TODO refer to arxiv preprint.
+#' linear regression; cf. Cho et al. (2024).
 #'
 #' @details
 #'  \tabular{ll}{
@@ -37,8 +36,8 @@
 #'
 #' @references
 #' Cho, H., Kley, T., and Li, H. (2024).
-#' Detection and inference of changes in high-dimensional linear regression with non-sparse structures
-#' (cf. \url{http://arxiv.org})
+#' Detection and inference of changes in high-dimensional linear regression
+#' with non-sparse structures (cf. \url{http://arxiv.org})
 #'
 NULL
 

@@ -8,8 +8,8 @@
 #' The following steps are applied:
 #' \itemize{
 #'  \item McScan algorithm, cf. Section 2.1 in Cho et al. (2024),
-#'  \item LOPE estimator \eqn{\\hat\\delta_j}, cf. Section 3.1 in Cho et al. (2024),
-#'  \item confidence intervals \eqn{\\C_{ij}(0.05)}, cf. eqn (14),
+#'  \item LOPE estimator \eqn{\hat\delta_j}, cf. Section 3.1 in Cho et al. (2024),
+#'  \item confidence intervals \eqn{C_{ij}(0.05)}, cf. eqn (14),
 #'    Section 3.2.2 in Cho et al. (2024).
 #' }
 #'
@@ -22,7 +22,7 @@
 #'      \item \code{cp} detected change points, length q
 #'      \item \code{delta} n times q matrix, j-th column is \eqn{\\delta_j}
 #'      \item \code{ci} n times 2 times q array, \code{ci[,1,j]} and
-#'        \code{ci[,1,j]} are lower and upper bounds of the confidence intervals,
+#'        \code{ci[,2,j]} are lower and upper bounds of the confidence intervals,
 #'        respectively
 #'    }
 #' @name inferchange

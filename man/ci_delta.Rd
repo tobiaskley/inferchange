@@ -66,6 +66,3 @@ print(ci)
 plot(ci)
 
 }
-\references{
-H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
-}

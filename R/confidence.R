@@ -23,7 +23,6 @@
 #' \item{ci}{matrix containing the lower and the upper bound of the simultaneous confidence intervals}
 #' \item{omega}{estimator of the precision matrix of \code{X}}
 #' \item{alpha}{input argument}
-#' @references H. Cho, T. Kley & H. Li (2024) Detection and inference of changes in high-dimensional linear regression with non-sparse structures. arXiv preprint.
 #' @examples
 #' old_seed <- .Random.seed
 #' set.seed(12345)

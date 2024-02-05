@@ -1,7 +1,7 @@
 
 #' Compute CLOM estimator
 #'
-#' Computes the CLOM estimator \eqn{\\hat\\delta_{0,n}(k)}
+#' Computes the CLOM estimator \eqn{\hat\delta_{0,n}(k)}
 #' defined in eqn. (8) of Section 3.1 in Cho et al. (2024).
 #'
 #' By default cross-validation is performed and the cross-validation estimate
@@ -36,7 +36,13 @@
 #' @importFrom PRIMAL Dantzig_solver
 #'
 #' @examples
-#' # TODO Add Example or remove this
+#' old_seed <- .Random.seed
+#' set.seed(12345)
+#' data <- dgp_gauss_sparse(n = 20, p = 20, z = 10, s = 3, rho = 1, sigma = 1)
+#' X <- data$X
+#' y <- data$y
+#' res <- clom(X, y, 10)
+#' .Random.seed <- old_seed
 clom <- function( X, y, k, standardize = FALSE,
                   lambdapath = NULL, nfolds = 5, nlambda = 100 ) {
 
