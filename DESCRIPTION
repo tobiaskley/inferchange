@@ -1,6 +1,7 @@
 Package: inferchange
 Title: Multiscale Covariance Scanning and Related Algorithms
 Version: 0.0.0.9000
+Date: 2024-02-05
 Authors@R: c(
   person("Haeran", "Cho", email = "haeran.cho@bristol.ac.uk", role=c("aut"),
           comment = c(ORCID = "0000-0002-0725-8704")),

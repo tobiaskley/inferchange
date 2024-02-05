@@ -14,7 +14,7 @@
 #' @param delta.hat an estimator of the differential parameter; if \code{delta.hat = NULL}, it is generated via \link[inferchange]{lope} with a tuning parameter generated via cross validation
 #' @param nfolds number of folds for the cross validation when producing an estimator of the precision matrix of \code{X}
 #' @param nlambdas size of the grid of the tuning parameter for the cross validation when producing an estimator of the precision matrix of \code{X}
-#' @param alpha confidence level between 0 and 1
+#' @param alpha 1 - confidence level between 0 and 1
 #' @param M number of random samples to be generated from the target Gaussian distribution
 #' @param do.split boolean; whether to split the sample in confidence interval generation or not. When the sample size is moderate, it is recommended not to split the sample.
 #' @return an S3 object of class \code{inferchange.ci}, which contains the following fields:
