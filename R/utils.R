@@ -31,7 +31,7 @@ print.inferchange.cp <- function(x, ...) {
 
 #' @export
 print.inferchange.ci <- function(x, ...) {
-  cat(paste(100 * x$alpha, "% simultaneous confidence intervals", sep = ''), "\n")
+  cat(paste(100 * (1 - x$alpha), "% simultaneous confidence intervals", sep = ''), "\n")
   x$ci
 }
 

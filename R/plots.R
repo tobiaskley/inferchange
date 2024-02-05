@@ -14,7 +14,7 @@ plot.inferchange.ci <- function(x, ...){
 
   ci <- x$ci
   p <- nrow(ci)
-  plot(1:p, rep(NA, p), ylim = range(ci), xlab = "Variables", ylab = "", main = paste( 100 * x$alpha, "% simultaneous confidence intervals", sep = ''))
+  plot(1:p, rep(NA, p), ylim = range(ci), xlab = "Variables", ylab = "", main = paste( 100 * (1 - x$alpha), "% simultaneous confidence intervals", sep = ''))
   arrows(1:p, ci[, 1], 1:p, ci[, 2], length = 0.05, angle = 90, code = 3, col = 8)
   points(x$delta.check, col = 1)
   positives <- which(ci[, 1] * ci[, 2] > 0)
