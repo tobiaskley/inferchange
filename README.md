@@ -11,7 +11,7 @@ Currently, the methodology described in the following pre-print is implemented:
 
 * Cho, H., Kley, T., and Li, H. (2024). Detection and inference of changes in
   high-dimensional linear regression with non-sparse structures
-  (cf. [http://arxiv.org/abs/????.?????}]).
+  (cf. http://arxiv.org).
 
 
 ## Getting started with ``inferchange``
@@ -38,8 +38,8 @@ help("inferchange")
 ```
 
 At the bottom of the online help page to the package you will find an index to
-all the help files available. The main functions are `McScan', `lope', `clom'
-and `ci_delta'. The respective help pages can be accessed by
+all the help files available. The main functions are ``McScan'', ``lope'',
+``clom'' and ``ci_delta''. The respective help pages can be accessed by
 
 ```
 help("McScan")

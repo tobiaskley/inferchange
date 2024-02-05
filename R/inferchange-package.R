@@ -38,7 +38,7 @@
 #' @references
 #' Cho, H., Kley, T., and Li, H. (2024).
 #' Detection and inference of changes in high-dimensional linear regression with non-sparse structures
-#' (cf. \url{http://arxiv.org/abs/????.?????})
+#' (cf. \url{http://arxiv.org})
 #'
 NULL
 
