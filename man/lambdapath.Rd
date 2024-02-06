@@ -7,7 +7,7 @@
 lambdapath(lambda_max, n, p, K = 100)
 }
 \arguments{
-\item{lambda_max}{TODO Add Description}
+\item{lambda_max}{maximum value of lambda values on grid}
 
 \item{n}{value \code{n}}
 

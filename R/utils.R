@@ -6,7 +6,7 @@
 #' This is the grid of lambda values employed as in `glmnet`.
 #' In applications lambda_max is chosen as
 #'
-#' @param lambda_max TODO Add Description
+#' @param lambda_max maximum value of lambda values on grid
 #' @param n value `n`
 #' @param p value `p`
 #' @param K number of lambda values

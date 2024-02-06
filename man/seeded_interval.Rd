@@ -21,7 +21,8 @@ intervals
 }
 \description{
 It wraps an efficient implementation in Fortran. This function is a copy of
-\code{interval} from https://github.com/kovacssolt/ChangePoints.
+\code{interval} from \cr
+https://github.com/kovacssolt/ChangePoints.
 }
 \examples{
 \donttest{

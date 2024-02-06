@@ -1,7 +1,8 @@
 #' Generating Seeded Intervals
 #'
 #' It wraps an efficient implementation in Fortran. This function is a copy of
-#' \code{interval} from https://github.com/kovacssolt/ChangePoints.
+#' \code{interval} from \cr
+#' https://github.com/kovacssolt/ChangePoints.
 #'
 #' @param n Interval length > 2.
 #' @param dec Decay rate: Rate of how fast the different layers will decrease in
