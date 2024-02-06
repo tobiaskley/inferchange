@@ -7,8 +7,6 @@
 #' @return A plot produced as per the input arguments
 #' @seealso \link{ci_delta}
 #' @importFrom graphics plot arrows points abline
-#' @examples
-#' # \donttest{}
 #' @export
 plot.inferchange.ci <- function(x, ...){
 
