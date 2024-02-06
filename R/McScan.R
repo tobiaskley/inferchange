@@ -49,7 +49,7 @@
 
 #' Multiscale covariance scanning for data segmentation
 #'
-#' The formal definition is given in Section 2.1 of Cho et al. (2024).
+#' The formal definition is given in Section 2.1 of Cho, Kley & Li (2024).
 #'
 #'
 #' @param X Design matrix n x p.

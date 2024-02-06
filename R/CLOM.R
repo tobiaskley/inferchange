@@ -2,7 +2,7 @@
 #' Compute CLOM estimator
 #'
 #' Computes the CLOM estimator \eqn{\\hat\\delta_{0,n}(k)}
-#' defined in eqn. (8) of Section 3.1 in Cho et al. (2024).
+#' defined in eqn. (8) of Section 3.1 in Cho, Kley & Li (2024).
 #'
 #' By default cross-validation is performed and the cross-validation estimate
 #' is returned. for cross-validation the estimates are obtained for all

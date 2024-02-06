@@ -43,7 +43,7 @@ the values of lambda are available as colnames.
 }
 \description{
 Computes the LOPE estimator \eqn{\\hat\\delta_{0,n}(k)}
-defined in eqn. (7) of Section 3.1 in Cho et al. (2024).
+defined in eqn. (7) of Section 3.1 in Cho, Kley & Li (2024).
 }
 \details{
 By default cross-validation is performed and the cross-validation estimate
