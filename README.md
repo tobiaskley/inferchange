@@ -52,5 +52,5 @@ A ``workhorse'' function, named `inferchange', that wraps the steps of a full
 change point analysis is also available. To access the help page call
 
 ```
-demo("inferchange")
+help("inferchange")
 ```
