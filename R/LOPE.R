@@ -65,7 +65,7 @@ lope <- function(X, y, k, standardize = FALSE,
   if (nfolds == 0) {
     # compute solutions from all of the data
     lasso1.all = glmnet::glmnet(X, y, alpha = 1, standardize = FALSE, intercept = FALSE,
-                        lambda = lambdapath)
+                        lambda = lambdapath / sqrt(min(k,n-k)))
     delta1.all <- as.matrix(lasso1.all$beta)
     colnames(delta1.all) <- sort(lambdapath, decreasing = TRUE)
   } else {
@@ -74,7 +74,7 @@ lope <- function(X, y, k, standardize = FALSE,
     lasso.mod = glmnet::glmnet(X, y, alpha = 1, standardize = TRUE, intercept = FALSE,
                        lambda = cv.mod$lambda.min)
     delta1.all <- matrix(lasso.mod$beta, ncol = 1)
-    colnames(delta1.all) <- cv.mod$lambda.min
+    colnames(delta1.all) <- cv.mod$lambda.min * sqrt(min(k,n-k))
 
   }
 

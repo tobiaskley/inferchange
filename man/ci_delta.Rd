@@ -32,7 +32,7 @@ ci_delta(
 
 \item{nlambdas}{size of the grid of the tuning parameter for the cross validation when producing an estimator of the precision matrix of \code{X}}
 
-\item{alpha}{confidence level between 0 and 1}
+\item{alpha}{1 - confidence level between 0 and 1}
 
 \item{M}{number of random samples to be generated from the target Gaussian distribution}
 
