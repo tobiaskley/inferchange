@@ -12,7 +12,7 @@ linear regression; cf. Cho et al. (2024).
 \cr Package: \tab inferchange
 \cr Type:    \tab Package
 \cr Version: \tab 0.0.0.9000
-\cr Date:    \tab 2024-02-05
+\cr Date:    \tab 2024-02-07
 \cr License: \tab GPL (>= 3)
 }
 }
