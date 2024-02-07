@@ -2,7 +2,7 @@
 % Please edit documentation in R/inferchange.R
 \name{inferchange}
 \alias{inferchange}
-\title{Full change point analysis}
+\title{Function for change point detection and inference about changes}
 \usage{
 inferchange(X, y, ...)
 }
@@ -19,21 +19,22 @@ a named list with elements
 \item \code{cp} detected change points, length q
 \item \code{delta} n times q matrix, j-th column is \eqn{\\delta_j}
 \item \code{ci} n times 2 times q array, \code{ci[,1,j]} and
-\code{ci[,2,j]} are lower and upper bounds of the confidence intervals,
+\code{ci[,1,j]} are lower and upper bounds of the confidence intervals,
 respectively
 }
 }
 \description{
-This is the \code{workhorse} function that implements all of the methodology
-developed in Cho et al. (2024).
+This is the \code{workhorse} function that implements all the methodologies
+developed in Cho, Kley & Li (2024) that detect multiple change points
+and infer about the changes in a high-dimensional linear regression setting.
 }
 \details{
 The following steps are applied:
 \itemize{
-\item McScan algorithm, cf. Section 2.1 in Cho et al. (2024),
-\item LOPE estimator \eqn{\hat\delta_j}, cf. Section 3.1 in Cho et al. (2024),
-\item confidence intervals \eqn{C_{ij}(0.05)}, cf. eqn (14),
-Section 3.2.2 in Cho et al. (2024).
+\item McScan algorithm, cf. Section 2.1 in Cho, Kley & Li (2024),
+\item LOPE estimator \eqn{\\hat\\delta_j}, cf. Section 3.1 in Cho, Kley & Li (2024),
+\item confidence intervals \eqn{\\C_{ij}(0.1)}, cf. eqn (14),
+Section 3.2.2 in Cho, Kley & Li (2024).
 }
 }
 \examples{

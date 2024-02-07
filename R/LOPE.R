@@ -1,8 +1,8 @@
 
 #' Compute LOPE estimator
 #'
-#' Computes the LOPE estimator \eqn{\hat\delta_{0,n}(k)}
-#' defined in eqn. (7) of Section 3.1 in Cho et al. (2024).
+#' Computes the LOPE estimator \eqn{\\hat\\delta_{0,n}(k)}
+#' defined in eqn. (7) of Section 3.1 in Cho, Kley & Li (2024).
 #'
 #' By default cross-validation is performed and the cross-validation estimate
 #' is returned. for cross-validation the estimates are obtained for all
@@ -36,13 +36,7 @@
 #' @importFrom glmnet glmnet cv.glmnet
 #'
 #' @examples
-#' old_seed <- .Random.seed
-#' set.seed(12345)
-#' data <- dgp_gauss_sparse(n = 20, p = 20, z = 10, s = 3, rho = 1, sigma = 1)
-#' X <- data$X
-#' y <- data$y
-#' res <- lope(X, y, 10)
-#' .Random.seed <- old_seed
+#' # TODO Add Example or remove this
 lope <- function(X, y, k, standardize = FALSE,
                  lambdapath = NULL, nfolds = 5, nlambda = 100) {
 

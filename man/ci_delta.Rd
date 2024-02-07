@@ -53,16 +53,17 @@ after a change point and, based on a Gaussian approximation result,
 produces a simultaneous confidence interval at a given level.
 }
 \details{
-See Cho, Kley and Li (2024) for further details.
+See Cho, Kley & Li (2024) for further details.
 }
 \examples{
+\donttest{
 old_seed <- .Random.seed
-set.seed(12345)
-data <- dgp_gauss_sparse(n = 200, p = 20, z = 100, s = 3, rho = 1, sigma = 1)
+set.seed(1234)
+data <- dgp_gauss_sparse(n = 300, p = 50, z = 75, s = 5, rho = 2, sigma = 1)
 X <- data$X
 y <- data$y
-ci <- ci_delta(X, y, 100)
+ci <- ci_delta(X, y, 75)
 print(ci)
 plot(ci)
-
+}
 }
