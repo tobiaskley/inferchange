@@ -38,8 +38,8 @@ help("inferchange")
 ```
 
 At the bottom of the online help page to the package you will find an index to
-all the help files available. The main functions are ``McScan'', ``lope'',
-``clom'' and ``ci_delta''. The respective help pages can be accessed by
+all the help files available. The main functions are ``McScan``, ``lope``,
+``clom`` and ``ci_delta``. The respective help pages can be accessed by
 
 ```
 help("McScan")
