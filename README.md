@@ -48,7 +48,7 @@ help("clom")
 help("ci_delta")
 ```
 
-A ``workhorse'' function, named `inferchange', that wraps the steps of a full
+A "workhorse" function, named ``inferchange``, that wraps the steps of a full
 change point analysis is also available. To access the help page call
 
 ```
