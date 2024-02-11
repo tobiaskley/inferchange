@@ -5,7 +5,7 @@ changes in high-dimensional linear regression available to data analysts and
 researchers in statistics.
 
 You can track (and contribute to) the development of `inferchange` at https://github.com/tobiaskley/inferchange. If you encounter unexpected behavior
-while using `quantspec`, please let us know by writing an [email](mailto:tobias.kley@uni-goettingen.de) or by filing an [issue](http://github.com/tobiaskley/inferchange/issues).
+while using `inferchange`, please let us know by writing an [email](mailto:tobias.kley@uni-goettingen.de) or by filing an [issue](http://github.com/tobiaskley/inferchange/issues).
 
 Currently, the methodology described in the following pre-print is implemented:
 
