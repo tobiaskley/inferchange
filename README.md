@@ -11,7 +11,7 @@ Currently, the methodology described in the following pre-print is implemented:
 
 * Cho, H., Kley, T., and Li, H. (2024). Detection and inference of changes in
   high-dimensional linear regression with non-sparse structures
-  (cf. http://arxiv.org).
+  ([arXiv](http://arxiv.org/abs/2402.06915)).
 
 
 ## Getting started with ``inferchange``
