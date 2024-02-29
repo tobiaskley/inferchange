@@ -31,7 +31,8 @@ print.inferchange.cp <- function(x, ...) {
 
 #' @export
 print.inferchange.ci <- function(x, ...) {
-  cat(paste(100 * (1 - x$alpha), "% simultaneous confidence intervals", sep = ''), "\n")
-  x$ci
+  cat(paste(100 * (1 - x$alpha), "% simultaneous confidence intervals not containing 0", sep = ''), "\n")
+  positives <- which(x$ci[, 1] * x$ci[, 2] > 0)
+  print(x$ci[positives, ])
 }
 

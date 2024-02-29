@@ -17,7 +17,7 @@ inferchange(X, y, ...)
 a named list with elements
 \itemize{
 \item \code{cp} detected change points, length q
-\item \code{delta} n times q matrix, j-th column is \eqn{\\delta_j}
+\item \code{delta} n times q matrix, j-th column is \eqn{\delta_j}
 \item \code{ci} n times 2 times q array, \code{ci[,1,j]} and
 \code{ci[,1,j]} are lower and upper bounds of the confidence intervals,
 respectively

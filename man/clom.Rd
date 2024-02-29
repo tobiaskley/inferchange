@@ -42,7 +42,7 @@ each column corresponds to the estimate obtained for one value of lambda
 the values of lambda are available as colnames.
 }
 \description{
-Computes the CLOM estimator \eqn{\\hat\\delta_{0,n}(k)}
+Computes the CLOM estimator \eqn{\hat\delta_{0,n}(k)}
 defined in eqn. (8) of Section 3.1 in Cho, Kley & Li (2024).
 }
 \details{

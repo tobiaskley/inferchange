@@ -12,7 +12,8 @@ McScan(
   method = c("not", "auto", "wbs", "bs"),
   bnd = max(round(min(2 * log(length(X)), length(y)/2)), 5),
   standardize = FALSE,
-  post = TRUE
+  post = TRUE,
+  interval
 )
 }
 \arguments{
@@ -21,7 +22,8 @@ McScan(
 \item{y}{Response vector n.}
 
 \item{ncp}{Specifies the number of estimated change points, and
-overrides the input \code{thd}.}
+overrides the input \code{thd}. It is only an upper bound, in case
+that \code{ncp} of change points are not detected.}
 
 \item{thd}{Stopping threshold, default log(n*p)/2.}
 
@@ -37,6 +39,10 @@ overrides the input \code{thd}.}
 Default TRUE when \code{thd} is in action.}
 
 \item{post}{Logical, post processing (default) or not.}
+
+\item{interval}{A \code{matrix} or \code{data.frame} with two columns,
+specifying the starting and the ending points of intervals,
+separately.}
 }
 \value{
 A list of class \code{inferchange.cp} with \code{print} and
