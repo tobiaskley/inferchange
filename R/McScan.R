@@ -21,6 +21,8 @@
     for (i in 1:cid) {
       est[i,] = .find_single_cp(CS, est$st[i], est$ed[i], est$bnd[i])
     }
+    est = est[with(est, order(cp, -val, decreasing = FALSE)),]
+    est = est[!duplicated(est$cp),]
   }
   return(est)
 }
@@ -55,7 +57,8 @@
 #' @param X Design matrix n x p.
 #' @param y Response vector n.
 #' @param ncp Specifies the number of estimated change points, and
-#'            overrides the input \code{thd}.
+#'            overrides the input \code{thd}. It is only an upper bound, in case
+#'            that \code{ncp} of change points are not detected.
 #' @param thd Stopping threshold, default log(n*p)/2.
 #' @param method \code{"not"}  NOT (default) with fixed threshold \code{thd}.
 #'               \code{"auto"} NOT with automatic threshold
@@ -66,6 +69,9 @@
 #'                    Default TRUE when \code{thd} is in action.
 #' @param bnd At least \code{bnd} away from boundaries of intervals.
 #' @param post Logical, post processing (default) or not.
+#' @param interval A \code{matrix} or \code{data.frame} with two columns,
+#'                 specifying the starting and the ending points of intervals,
+#'                 separately.
 #'
 #' @return A list of class \code{inferchange.cp} with \code{print} and
 #'         \code{plot} functions.
@@ -83,7 +89,7 @@
 #' plot(est_cps)
 McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
                    bnd = max(round(min(2*log(length(X)), length(y)/2)), 5),
-                   standardize = FALSE, post = TRUE) {
+                   standardize = FALSE, post = TRUE, interval) {
   rescale = FALSE
   # Check inputs
   stopifnot(is.matrix(X))
@@ -109,7 +115,6 @@ McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
       if (ncp == 1) { method = "bs" }
     }
   }
-
   # Pre-computation
   if (standardize) { X = sweep(X, 2, sqrt(colSums(X^2)), "/") }
   M  = X * matrix(as.array(y), nrow = n, ncol = p)
@@ -154,7 +159,7 @@ McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
       }
     }
   } else if (method == "not") {
-    intv = seeded_interval(n, minl = 2*bnd+2)
+    intv = if(missing(interval)) seeded_interval(n, minl=2*bnd+2) else interval
     for (i in 1:nrow(intv)) {
       ret = rbind(ret, .find_single_cp(CS, intv[i, 1], intv[i, 2], bnd))
     }
@@ -191,7 +196,7 @@ McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
       ret = aux
     }
   } else if (method == "wbs") {
-    intv = seeded_interval(n, minl = 2*bnd+2)
+    intv = if(missing(interval)) seeded_interval(n, minl=2*bnd+2) else interval
     for (i in 1:nrow(intv)) {
       ret = rbind(ret, .find_single_cp(CS, intv[i, 1], intv[i, 2], bnd))
     }
