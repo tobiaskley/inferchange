@@ -16,7 +16,7 @@ A plot produced as per the input arguments
 }
 \description{
 Plotting method for S3 objects of class \code{inferchange.ci}.
-Displays the de-sparsified estimator of differential parameter for each coefficient (x-axis) and the simultaneous confidence interval constructed around it
+Displays the original and de-sparsified estimators of differential parameter for each coefficient (x-axis) and the simultaneous confidence interval constructed around it
 }
 \seealso{
 \link{ci_delta}

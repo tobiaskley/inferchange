@@ -1,7 +1,7 @@
 #' @title Plotting the confidence intervals for the differential parameters
 #' @method plot inferchange.ci
 #' @description Plotting method for S3 objects of class \code{inferchange.ci}.
-#' Displays the de-sparsified estimator of differential parameter for each coefficient (x-axis) and the simultaneous confidence interval constructed around it
+#' Displays the original and de-sparsified estimators of differential parameter for each coefficient (x-axis) and the simultaneous confidence interval constructed around it
 #' @param x \code{inferchange.ci} object
 #' @param ... additional arguments
 #' @return A plot produced as per the input arguments
