@@ -6,7 +6,7 @@
 #' @param ... additional arguments
 #' @return A plot produced as per the input arguments
 #' @seealso \link{ci_delta}
-#' @importFrom graphics plot arrows points abline
+#' @importFrom graphics plot arrows points abline legend
 #' @export
 plot.inferchange.ci <- function(x, ...){
 
