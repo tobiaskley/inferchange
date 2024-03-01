@@ -1,5 +1,3 @@
-
-
 #' Function for change point detection and inference about changes
 #'
 #' This is the `workhorse` function that implements all the methodologies
