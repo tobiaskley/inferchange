@@ -54,6 +54,7 @@ plot.inferchange.cp <- function(x, ...) {
   print(plt)
   if (!is.null(attr(x, "solution_path"))) {
     sopa = attr(x, "solution_path")
+    sopa = sopa[is.finite(unlist(sopa[,2])), ]
     id   = attr(x, "selected_solution")
     plt  = ggplot(data.frame("value" = unlist(sopa[,2]),
                              "ncp" = sapply(sopa[,3], length)),
