@@ -21,6 +21,7 @@ Description: Implements function for inference of changes in high-dimensional
 Imports:
   ggplot2,
   glmnet,
+  gridExtra,
   PRIMAL
 License: GPL (>= 3)
 URL: http://github.com/inferchange/quantspec
