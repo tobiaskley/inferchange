@@ -34,6 +34,10 @@ plot.inferchange.ci <- function(x, ...){
 #' @param x \code{inferchange.cp} object
 #' @param ... additional arguments
 #'
+#' @return A list of \code{ggplot} objects
+#'          \code{plt_cp}   Visualize the detected change points
+#'          \code{plt_path} Plot the solution path (when calculated)
+#'
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
 #' @export
@@ -56,7 +60,7 @@ plot.inferchange.cp <- function(x, ...) {
     geom_vline(xintercept = x$cp, linetype = "dashed", color = "red") +
     xlab("Index of sample") + ylab("CUSUM of Cov(X, y)") +
     theme_minimal() +
-    ggtitle("Estimated change points (red dashed vertical lines)")
+    ggtitle("Estimated change points (vertical dashed red lines)")
   if (!is.null(attr(x, "solution_path"))) {
     sopa = attr(x, "solution_path")
     sopa = sopa[is.finite(unlist(sopa[,2])), ]
@@ -75,5 +79,9 @@ plot.inferchange.cp <- function(x, ...) {
       theme_minimal() +
       theme(axis.line = element_line())
     gridExtra::grid.arrange(plt, plt2, nrow = 2)
-  } else { print(plt) }
+    return = list(plt_cp = plt, plt_path = plt2)
+  } else {
+    print(plt)
+    return = list(plt_cp = plt)
+  }
 }

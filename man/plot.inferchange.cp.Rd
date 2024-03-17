@@ -11,6 +11,11 @@
 
 \item{...}{additional arguments}
 }
+\value{
+A list of \code{ggplot} objects
+\code{plt_cp}   Visualize the detected change points
+\code{plt_path} Plot the solution path (when calculated)
+}
 \description{
 Plotting the segmentation result, which is of class \code{inferchange.cp},
 e.g. returned by function \code{McScan}
