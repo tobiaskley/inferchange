@@ -21,9 +21,10 @@ Description: Implements function for inference of changes in high-dimensional
 Imports:
   ggplot2,
   glmnet,
+  gridExtra,
   PRIMAL
 License: GPL (>= 3)
-URL: http://github.com/inferchange/quantspec
+URL: http://github.com/tobiaskley/inferchange
 BugReports: http://github.com/tobiaskley/inferchange/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

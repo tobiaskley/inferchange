@@ -34,7 +34,12 @@ plot.inferchange.ci <- function(x, ...){
 #' @param x \code{inferchange.cp} object
 #' @param ... additional arguments
 #'
+#' @return A list of \code{ggplot} objects
+#'          \code{plt_cp}   Visualize the detected change points
+#'          \code{plt_path} Plot the solution path (when calculated)
+#'
 #' @import ggplot2
+#' @importFrom gridExtra grid.arrange
 #' @export
 plot.inferchange.cp <- function(x, ...) {
   X = attr(x, "X")
@@ -42,21 +47,25 @@ plot.inferchange.cp <- function(x, ...) {
   n = nrow(X)
   p = ncol(X)
   Xy =  X * matrix(y, nrow = n, ncol = p)
-  sample_index <- covariance <- ncp <- value <- NA  # dummy codes to avoid notes
-  plt = ggplot(data.frame("sample_index" = rep(1:n, p),
-                          "covariance" = as.vector(Xy)),
-               aes(x = sample_index, y = covariance)) +
-    geom_line(color="gray")  +
+  Xy = apply(Xy, 2, cumsum)
+  k  = 1:n
+  csXy = matrix(sqrt((n - k)/n/k) + sqrt(k/n/(n - k)), nrow = length(k),
+                    ncol = ncol(Xy)) * Xy[k, ]
+  csXy = csXy - matrix(sqrt(k/n/(n - k)), ncol = 1) %*% Xy[n, ]
+  df   = utils::stack(as.data.frame(csXy, row.names = NULL, col.names = NULL))
+  df$x = rep(seq_len(nrow(csXy)), ncol(csXy))
+  values <- ind <- ncp <- value <- NA  # dummy codes to avoid notes
+  plt = ggplot(df, aes(x = x, y = values, group = ind)) +
+    geom_line(color = "gray", na.rm = TRUE)  +
     geom_vline(xintercept = x$cp, linetype = "dashed", color = "red") +
-    xlab("Index of sample") + ylab("Covariance of X and y (gray lines)") +
+    xlab("Index of sample") + ylab("CUSUM of Cov(X, y)") +
     theme_minimal() +
-    ggtitle("Estimated change points (red dashed vertical lines)")
-  print(plt)
+    ggtitle("Estimated change points (vertical dashed red lines)")
   if (!is.null(attr(x, "solution_path"))) {
     sopa = attr(x, "solution_path")
     sopa = sopa[is.finite(unlist(sopa[,2])), ]
     id   = attr(x, "selected_solution")
-    plt  = ggplot(data.frame("value" = unlist(sopa[,2]),
+    plt2 = ggplot(data.frame("value" = unlist(sopa[,2]),
                              "ncp" = sapply(sopa[,3], length)),
                   aes(x = ncp, y = value)) +
       geom_line() + geom_count(alpha = 0.5) +
@@ -69,6 +78,10 @@ plot.inferchange.cp <- function(x, ...) {
       scale_size_continuous(breaks = round) +
       theme_minimal() +
       theme(axis.line = element_line())
+    gridExtra::grid.arrange(plt, plt2, nrow = 2)
+    return = list(plt_cp = plt, plt_path = plt2)
+  } else {
     print(plt)
+    return = list(plt_cp = plt)
   }
 }
