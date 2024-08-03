@@ -63,7 +63,7 @@ clom <- function( X, y, k, standardize = FALSE,
   Ytilde <- c(rep(-1/k, k), rep(1/(n-k), n-k)) * y
   if (nfolds == 0) {
     # compute solutions from all of the data
-    D <- Dantzig_solver(X, Ytilde, max_it = 1000,
+    D <- PRIMAL::Dantzig_solver(X, Ytilde, max_it = 1000,
                         lambda_threshold = min(lambdapath) / sqrt(k*(n-k)/n))
 
     delta1.all <- select_beta(lambdapath / sqrt(k*(n-k)/n), D)
