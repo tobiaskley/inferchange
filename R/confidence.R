@@ -11,6 +11,7 @@
 #' @param y vector of the responses
 #' @param k index of a single change point; must be an integer between \code{1} and \code{nrow(X) - 1}
 #' @param standardize boolean; if \code{standardize = TRUE}, each column of \code{X} is divided by its L2-norm
+#' @param bootstrap boolean; if \code{bootstrap = TRUE}, multiplier bootstrap is performed while \code{bootstrap = FALSE}, sampling is directly performed from the limit distribution
 #' @param delta.hat an estimator of the differential parameter; if \code{delta.hat = NULL}, it is generated via \link[inferchange]{lope} with a tuning parameter generated via cross validation
 #' @param nfolds number of folds for the cross validation when producing an estimator of the precision matrix of \code{X}
 #' @param nlambdas size of the grid of the tuning parameter for the cross validation when producing an estimator of the precision matrix of \code{X}
@@ -36,7 +37,7 @@
 #' }
 #' @importFrom stats cov quantile
 #' @export
-ci_delta <- function(X, y, k, standardize = FALSE,
+ci_delta <- function(X, y, k, standardize = FALSE, bootstrap = TRUE,
                      delta.hat = NULL, nfolds = 3, nlambdas = 50,
                      alpha = .1,  M = 999, do.split = FALSE){
 
@@ -70,12 +71,24 @@ ci_delta <- function(X, y, k, standardize = FALSE,
   u <- X[ind1, ] * 0
   u[ind1 <= k, ] <- X[ind1[ind1 <= k], ] * c(y[ind1[ind1 <= k]] + k/n * X[ind1[ind1 <= k], ] %*% delta.hat)
   u[ind1 > k, ] <- X[ind1[ind1 > k], ] * c(y[ind1[ind1 > k]] - (n - k)/n * X[ind1[ind1 > k], ] %*% delta.hat)
-  gamma <- k/n * cov(u[ind1 <= k, ]) + (n - k)/n * cov(u[ind1 > k, ])
-  sv <- svd(gamma, nv = 0)
-  v.cov <- omega %*% sv$u %*% diag(sqrt(pmax(sv$d, 0)))
 
-  tmp <- v.cov %*% matrix(stats::rnorm(M * p), nrow = p)
-  qq <- c(apply(abs(tmp), 2, max), max(abs(delta.check)))
+  if(bootstrap){
+    u <- t(t(u) - apply(u, 2, mean))
+    ou <- u %*% t(omega)
+    tmp <- rep(0, M)
+    for(ii in 1:M){
+      tmp[ii] <- max(abs(apply(rnorm(length(ind1)) *
+                                 rep(c(-sqrt(sum(ind1 > k) / sum(ind1 <= k)), sqrt(sum(ind1 <= k) / sum(ind1 > k))), c(sum(ind1 <= k), sum(ind1 > k))) *
+                                 ou, 2, sum) / sqrt(length(ind1))))
+    }
+    qq <- c(tmp, max(abs(delta.check)))
+  } else {
+    gamma <- k/n * cov(u[ind1 <= k, ]) + (n - k)/n * cov(u[ind1 > k, ])
+    sv <- svd(gamma, nv = 0)
+    v.cov <- omega %*% sv$u %*% diag(sqrt(pmax(sv$d, 0)))
+    tmp <- v.cov %*% matrix(stats::rnorm(M * p), nrow = p)
+    qq <- c(apply(abs(tmp), 2, max), max(abs(delta.check)))
+  }
   rr <- quantile(qq, 1 - alpha/2) * sqrt(n/k/(n - k))
   ci <- cbind(delta.check - rr, delta.check + rr)
   colnames(ci) <- c('lower', 'upper')
