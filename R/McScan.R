@@ -104,8 +104,8 @@ McScan <- function(X, y, ncp, thd, method = c("not", "auto", "wbs", "bs"),
   } else {
     if (missing(ncp)) {
       if (missing(thd)) {
-        thd = log(n*p)/2
-        cat('Default threshold log(n*p)/2 is used!\n')
+        thd = 1.9*sqrt(log(n*p))
+        cat('Default threshold 1.9*sqrt(log(n*p)) is used!\n')
       }
       rescale = TRUE
     } else {
