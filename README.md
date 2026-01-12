@@ -9,8 +9,8 @@ while using `inferchange`, please let us know by writing an [email](mailto:tobia
 
 Currently, the methodology described in the following pre-print is implemented:
 
-* Cho, H., Kley, T., and Li, H. (2024). Detection and inference of changes in
-  high-dimensional linear regression with non-sparse structures. [Journal of the Royal Statistical Society Series B: Statistical Methodology]( https://doi.org/10.1093/jrsssb/qkaf029), Volume 87, Issue 5, November 2025, Pages 1528–1552. ([arXiv](http://arxiv.org/abs/2402.06915)).
+* Cho, H., Kley, T., and Li, H. (2024). [Detection and inference of changes in
+  high-dimensional linear regression with non-sparse structures.]( https://doi.org/10.1093/jrsssb/qkaf029) *Journal of the Royal Statistical Society Series B: Statistical Methodology,* Volume 87, Issue 5, November 2025, Pages 1528–1552. ([arXiv](http://arxiv.org/abs/2402.06915)).
 
 
 ## Getting started with ``inferchange``
